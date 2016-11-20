@@ -16,5 +16,7 @@ public class PAcesso {
 	}
 	public void Atualizar(int codigoUsuario){
 		
+	
+		
 	}
 }

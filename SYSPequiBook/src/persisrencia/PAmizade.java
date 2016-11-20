@@ -18,6 +18,9 @@ public class PAmizade {
 	public List<EPerfilUsuario> Listar(int codigoUsuario) {
 		return null;
 	}
+	public List<EPerfilUsuario> ListarSolicitaco(int codigoUsuario) {
+		return null;
+	}
 
 	public void Deletar(int codigoAmizade) {
 
