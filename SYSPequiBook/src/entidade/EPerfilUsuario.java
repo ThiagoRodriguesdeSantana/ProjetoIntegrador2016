@@ -7,7 +7,7 @@ public class EPerfilUsuario {
 	private int codigo;
 	private String nome;
 	private String telefone;
-	private BufferedImage foto;
+	private byte[] foto;
 	private String status;
 	private StatusPerfil statusPerfil;
 	private EAcesso acesso;
@@ -33,10 +33,10 @@ public class EPerfilUsuario {
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	public BufferedImage getFoto() {
+	public byte[] getFoto() {
 		return foto;
 	}
-	public void setFoto(BufferedImage foto) {
+	public void setFoto(byte[] foto) {
 		this.foto = foto;
 	}
 	public String getStatus() {

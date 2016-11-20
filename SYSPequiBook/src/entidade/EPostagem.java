@@ -6,7 +6,7 @@ import java.time.LocalDate;
 public class EPostagem {
 
 	private int codigo;
-	private BufferedImage imagem;
+	private byte[] imagem;
 	private String mensagem;
 	private EPerfilUsuario usuario;
 	private LocalDate data;
@@ -17,10 +17,10 @@ public class EPostagem {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	public BufferedImage getImagem() {
+	public byte[] getImagem() {
 		return imagem;
 	}
-	public void setImagem(BufferedImage imagem) {
+	public void setImagem(byte[] imagem) {
 		this.imagem = imagem;
 	}
 	public String getMensagem() {
