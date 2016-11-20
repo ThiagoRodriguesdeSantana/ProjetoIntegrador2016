@@ -13,4 +13,7 @@ public class PMensagem {
 	public List<EMensagem> Listar(int codigoUsuario) {
 		return null;
 	}
+	public void Atualizar(int codigoMensagem){
+		
+	}
 }

@@ -1,6 +1,7 @@
 package negocio;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import entidade.EAcesso;
@@ -13,8 +14,9 @@ import persisrencia.PPerfilUsuario;
 public class NPerfilUsuario {
 
 	private PPerfilUsuario _PPerfilUsuario = new PPerfilUsuario();
-	private NAmizade _NAmizade = new NAmizade();
+	private NAmizade  _NAmizade  = new NAmizade();
 	private NPostagem _NPostagem = new NPostagem();
+	private NMensagem _NMensagem = new NMensagem();
 	
 	public void SalvarPerfil(EPerfilUsuario ePerfilUsuario) throws Exception{
 		
@@ -81,19 +83,24 @@ public class NPerfilUsuario {
 	}
 	public void ResponderSolicitacao(EAmizade amizade){
 		
+		_NAmizade.AtualizarAmizade(amizade);
 	}
 	public void EnviarMensagem(EMensagem mensagem){
 		
-	}
-	public EMensagem ReceberMensagem(int codigoUsuario){
-		return null;
-	}
-	public void LerMensagem(EMensagem mensagem){
+		_NMensagem.EnviarMensagem(mensagem);
 		
 	}
+	public List<EMensagem> ReceberMensagem(int codigoUsuario){
+		
+		return _NMensagem.ListarMensagens(codigoUsuario);
+	}
+	public void LerMensagem(EMensagem mensagem){
+		_NMensagem.LerMensagem(mensagem.getCodigo());
+	}
 	
-	public List<EPostagem> ListarPostagem(int codigoUsuario){
-		return null;
+	public List<EPostagem> ListarPostagem(int codigoUsuario, LocalDateTime inicio, LocalDateTime fim){
+		
+		return _NPostagem.ListarPostagem(codigoUsuario, inicio, fim);
 	}
 	
 	

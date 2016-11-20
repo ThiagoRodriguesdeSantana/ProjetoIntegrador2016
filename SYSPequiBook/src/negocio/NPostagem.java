@@ -20,7 +20,7 @@ public class NPostagem {
 		_PPostagem.Excuir(codigoPstagem);
 		
 	}
-	public List<EPostagem> ListarPstagem(int codigoUsuario, LocalDateTime dataIni, LocalDateTime dataFim){
+	public List<EPostagem> ListarPostagem(int codigoUsuario, LocalDateTime dataIni, LocalDateTime dataFim){
 		return _PPostagem.Listar(codigoUsuario, dataIni, dataFim);
 	}
 	public void AtualizarPstagem(EPostagem ePostagem){

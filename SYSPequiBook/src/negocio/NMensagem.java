@@ -18,4 +18,7 @@ public class NMensagem {
 		
 		return _PMensagem.Listar(codigoUsuario);
 	}
+	public void LerMensagem(int codigoMensagem){
+		_PMensagem.Atualizar(codigoMensagem);
+	}
 }
