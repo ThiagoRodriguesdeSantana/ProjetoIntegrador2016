@@ -12,7 +12,7 @@ public class EPerfilUsuario {
 	private StatusPerfil statusPerfil;
 	private EAcesso acesso;
 	private StatusRelacionamento statusRelacionamento;
-	private StatusLogin statusLogin;
+	private boolean statusLogin;
 	
 	
 	public int getCodigo() {
@@ -63,10 +63,10 @@ public class EPerfilUsuario {
 	public void setStatusRelacionamento(StatusRelacionamento statusRelacionamento) {
 		this.statusRelacionamento = statusRelacionamento;
 	}
-	public StatusLogin getStatusLogin() {
+	public boolean getStatusLogin() {
 		return statusLogin;
 	}
-	public void setStatusLogin(StatusLogin statusLogin) {
+	public void setStatusLogin(boolean statusLogin) {
 		this.statusLogin = statusLogin;
 	}
 

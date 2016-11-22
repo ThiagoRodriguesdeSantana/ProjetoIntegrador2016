@@ -1,6 +1,7 @@
 package negocio;
 
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class NPerfilUsuario {
 		_PPerfilUsuario.Salvar(ePerfilUsuario);
 		
 	}
-	public void EditarPerfil(EPerfilUsuario ePerfilUsuario){
+	public void EditarPerfil(EPerfilUsuario ePerfilUsuario) throws SQLException{
 		
 		if(ePerfilUsuario.equals(NAcesso.EPerfilUsuarioLogado)){
 			
@@ -55,13 +56,13 @@ public class NPerfilUsuario {
 		_NAmizade.DesfazerAmizade(amizade.getCodigo());
 		
 	}
-	public void ExcluirConta(){
+	public void ExcluirConta() throws SQLException{
 		
 		_PPerfilUsuario.Excluir(NAcesso.EPerfilUsuarioLogado.getCodigo());
 		
 		
 	}
-	public EPerfilUsuario ConsultarUsuario(EAcesso acesso){
+	public EPerfilUsuario ConsultarUsuario(EAcesso acesso) throws SQLException{
 		
 		return _PPerfilUsuario.Consultar(acesso);
 	}
