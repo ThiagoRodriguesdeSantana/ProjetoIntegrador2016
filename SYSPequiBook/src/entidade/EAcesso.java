@@ -3,16 +3,16 @@ package entidade;
 
 public class EAcesso {
 
-	private EPerfilUsuario usuario;
+	private int codigo;
 	private String email;
 	private String Senha;
 	
 	
-	public EPerfilUsuario getUsuario() {
-		return usuario;
+	public int getCodigo() {
+		return codigo;
 	}
-	public void setUsuario(EPerfilUsuario usuario) {
-		this.usuario = usuario;
+	public void setCodigo(int codigo) {
+		this.codigo = codigo;
 	}
 	public String getEmail() {
 		return email;

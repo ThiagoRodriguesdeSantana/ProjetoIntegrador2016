@@ -17,15 +17,16 @@ public class NAcesso {
 		} else if (eAcesso.getSenha().isEmpty()) {
 			throw new Exception("É necessário informar uma senha!");
 		}
-		EPerfilUsuario perfilUsuario = _NPerfilUsuario.ConsultarUsuario(eAcesso);
 		
+		EPerfilUsuario perfilUsuario = _NPerfilUsuario.ConsultarUsuario(eAcesso);
+
 		if (perfilUsuario.equals(null)) {
 			throw new Exception("Usuário não encotrado! Verifique seu login senha.");
 		}
+		
 		EPerfilUsuarioLogado = perfilUsuario;
 		return perfilUsuario;
 	}
-
 	public void Deslogar() {
 		
 		_Acesso.Atualizar(EPerfilUsuarioLogado.getCodigo());
