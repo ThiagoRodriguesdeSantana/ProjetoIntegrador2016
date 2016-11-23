@@ -1,5 +1,7 @@
 package negocio;
 
+import java.sql.SQLException;
+
 import entidade.EAcesso;
 import entidade.EPerfilUsuario;
 import persisrencia.PAcesso;
@@ -7,7 +9,7 @@ import persisrencia.PAcesso;
 public class NAcesso {
 
 	private PAcesso _Acesso = new PAcesso();
-	public static EPerfilUsuario EPerfilUsuarioLogado;
+	public static EPerfilUsuario EPerfilUsuarioLogado ;
 	private NPerfilUsuario _NPerfilUsuario = new NPerfilUsuario();
 
 	public EPerfilUsuario Logar(EAcesso eAcesso) throws Exception {
@@ -27,9 +29,9 @@ public class NAcesso {
 		EPerfilUsuarioLogado = perfilUsuario;
 		return perfilUsuario;
 	}
-	public void Deslogar() {
+	public void Deslogar() throws SQLException {
 		
-		_Acesso.Atualizar(EPerfilUsuarioLogado.getCodigo());
+		_Acesso.Atualizar(EPerfilUsuarioLogado);
 
 	}
 }

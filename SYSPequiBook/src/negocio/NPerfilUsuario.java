@@ -47,7 +47,7 @@ public class NPerfilUsuario {
 		return _NAmizade.ListarAmigos(NAcesso.EPerfilUsuarioLogado.getCodigo());
 		
 	}
-	public List<EPerfilUsuario> ListarUsuarios(String nome){
+	public List<EPerfilUsuario> ListarUsuarios(String nome) throws SQLException{
 		
 		return _PPerfilUsuario.Listar(nome);
 	}
@@ -72,7 +72,7 @@ public class NPerfilUsuario {
 		_NPostagem.Postar(ePostagem);
 		
 	}
-	public void SolicitarAmizade(EAmizade amizade){
+	public void SolicitarAmizade(EAmizade amizade) throws SQLException{
 		
 		_NAmizade.SolicitarAmizade(amizade);
 		
@@ -82,7 +82,7 @@ public class NPerfilUsuario {
 		return _NAmizade.ListarSolicitacoes();
 		
 	}
-	public void ResponderSolicitacao(EAmizade amizade){
+	public void ResponderSolicitacao(EAmizade amizade) throws SQLException{
 		
 		_NAmizade.AtualizarAmizade(amizade);
 	}

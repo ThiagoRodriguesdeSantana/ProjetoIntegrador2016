@@ -84,7 +84,33 @@ public class PAcesso {
 
 	}
 
-	public void Atualizar(int codigoUsuario) {
+	public void Atualizar(EPerfilUsuario perfilUsuario) throws SQLException {
 
+		Connection con = util.Conexao.getConexao();
+
+		con.setAutoCommit(false);
+		try {
+			String sql = "UPDATE public.acesso"
+					+ " SET id_acesso=?,"
+					+ " senha=?,"
+					+ " email=?"
+					+ " WHERE email="+ perfilUsuario.getAcesso().getEmail();
+
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, perfilUsuario.getCodigo());
+			ps.setString(2, perfilUsuario.getAcesso().getSenha());
+			ps.setString(3, perfilUsuario.getAcesso().getEmail());
+			
+			ps.execute();
+
+			_PerfilUsuario.Editar(perfilUsuario);
+
+			con.commit();
+
+		}
+		catch (Exception e) {
+			con.rollback();
+		}
+	
 	}
 }
