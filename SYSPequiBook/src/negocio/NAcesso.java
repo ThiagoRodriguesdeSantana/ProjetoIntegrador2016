@@ -9,7 +9,7 @@ import persisrencia.PAcesso;
 public class NAcesso {
 
 	private PAcesso _Acesso = new PAcesso();
-	public static EPerfilUsuario EPerfilUsuarioLogado ;
+	public static EPerfilUsuario EPerfilUsuarioLogado;
 	private NPerfilUsuario _NPerfilUsuario = new NPerfilUsuario();
 
 	public EPerfilUsuario Logar(EAcesso eAcesso) throws Exception {
@@ -19,19 +19,39 @@ public class NAcesso {
 		} else if (eAcesso.getSenha().isEmpty()) {
 			throw new Exception("É necessário informar uma senha!");
 		}
-		
+
 		EPerfilUsuario perfilUsuario = _NPerfilUsuario.ConsultarUsuario(eAcesso);
 
 		if (perfilUsuario.equals(null)) {
 			throw new Exception("Usuário não encotrado! Verifique seu login senha.");
 		}
-		
+
 		EPerfilUsuarioLogado = perfilUsuario;
 		return perfilUsuario;
 	}
+
 	public void Deslogar() throws SQLException {
-		
+
 		_Acesso.Atualizar(EPerfilUsuarioLogado);
+
+	}
+
+	public void Excluir() throws SQLException {
+
+		_Acesso.Deletar(EPerfilUsuarioLogado);
+	}
+
+	public void Salvar(EPerfilUsuario perfilUsuario) throws SQLException {
+
+		_Acesso.Salvar(perfilUsuario);
+	}
+
+	public void EditarPerfil(EPerfilUsuario ePerfilUsuario) throws SQLException {
+
+		if (ePerfilUsuario.equals(NAcesso.EPerfilUsuarioLogado)) {
+
+			_Acesso.Atualizar(ePerfilUsuario);
+		}
 
 	}
 }

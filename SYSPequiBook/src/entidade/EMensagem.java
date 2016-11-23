@@ -1,5 +1,6 @@
 package entidade;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 public class EMensagem {
@@ -8,13 +9,13 @@ public class EMensagem {
 	private int codigoRemetente;
 	private int codigoDestinatario;
 	private String mensagem;
-	private LocalDateTime dataHoraEnvio;
+	private Date dataHoraEnvio;
 	private boolean lido;
 	
-	public LocalDateTime getDataHoraEnvio() {
+	public Date getDataHoraEnvio() {
 		return dataHoraEnvio;
 	}
-	public void setDataHoraEnvio(LocalDateTime dataHoraEnvio) {
+	public void setDataHoraEnvio(Date dataHoraEnvio) {
 		this.dataHoraEnvio = dataHoraEnvio;
 	}
 	public boolean isLido() {

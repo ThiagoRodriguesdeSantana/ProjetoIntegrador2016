@@ -18,6 +18,7 @@ public class NPerfilUsuario {
 	private NAmizade  _NAmizade  = new NAmizade();
 	private NPostagem _NPostagem = new NPostagem();
 	private NMensagem _NMensagem = new NMensagem();
+	private NAcesso   _NAcesso   = new NAcesso(); 
 	
 	public void SalvarPerfil(EPerfilUsuario ePerfilUsuario) throws Exception{
 		
@@ -31,18 +32,17 @@ public class NPerfilUsuario {
 			throw new Exception("É necessário cadastrar um nome ou apelido!");
 		}
 		
-		_PPerfilUsuario.Salvar(ePerfilUsuario);
+		_NAcesso.Salvar(ePerfilUsuario);
 		
 	}
 	public void EditarPerfil(EPerfilUsuario ePerfilUsuario) throws SQLException{
 		
-		if(ePerfilUsuario.equals(NAcesso.EPerfilUsuarioLogado)){
-			
-			_PPerfilUsuario.Editar(ePerfilUsuario);
-		}
+		
+			_NAcesso.EditarPerfil(ePerfilUsuario);
+		
 		
 	}
-	public List<EPerfilUsuario> ListarAmigos(){
+	public List<EPerfilUsuario> ListarAmigos() throws SQLException{
 		
 		return _NAmizade.ListarAmigos(NAcesso.EPerfilUsuarioLogado.getCodigo());
 		
@@ -51,14 +51,14 @@ public class NPerfilUsuario {
 		
 		return _PPerfilUsuario.Listar(nome);
 	}
-	public void DesfazerAmizade(EAmizade amizade){
+	public void DesfazerAmizade(EAmizade amizade) throws Exception{
 		
 		_NAmizade.DesfazerAmizade(amizade.getCodigo());
 		
 	}
 	public void ExcluirConta() throws SQLException{
 		
-		_PPerfilUsuario.Excluir(NAcesso.EPerfilUsuarioLogado.getCodigo());
+		_NAcesso.Excluir();
 		
 		
 	}
@@ -77,7 +77,7 @@ public class NPerfilUsuario {
 		_NAmizade.SolicitarAmizade(amizade);
 		
 	}
-	public List<EPerfilUsuario> ReceberSolicitacaoDeAmizade(EAmizade amizade){
+	public List<EPerfilUsuario> ReceberSolicitacaoDeAmizade(EAmizade amizade) throws SQLException{
 		
 		return _NAmizade.ListarSolicitacoes();
 		

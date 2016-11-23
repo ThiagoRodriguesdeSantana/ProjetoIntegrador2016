@@ -37,7 +37,7 @@ public class PAcesso {
 			rs.close();
 
 			
-			_PerfilUsuario.Salvar(perfilUsuario);
+			_PerfilUsuario.Salvar(perfilUsuario,con);
 
 			con.commit();
 
@@ -55,7 +55,7 @@ public class PAcesso {
 		con.setAutoCommit(false);
 		try {
 			
-			_PerfilUsuario.Excluir(perfilUsuario.getCodigo());
+			_PerfilUsuario.Excluir(perfilUsuario.getCodigo(),con);
 			
 			String sql = "DELETE FROM public.acesso WHERE email = ?";
 
@@ -103,7 +103,7 @@ public class PAcesso {
 			
 			ps.execute();
 
-			_PerfilUsuario.Editar(perfilUsuario);
+			_PerfilUsuario.Editar(perfilUsuario,con);
 
 			con.commit();
 

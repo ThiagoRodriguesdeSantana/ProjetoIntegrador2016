@@ -56,11 +56,28 @@ public class PAmizade {
 		
 	}
 
-	public List<EPerfilUsuario> ListarSolicitaco(int codigoUsuario) {
-		return null;
+	public List<EPerfilUsuario> ListarSolicitaco(int codigoUsuario) throws SQLException {
+		PPerfilUsuario perfilUsuario = new PPerfilUsuario();
+		return perfilUsuario.ListarSolicitacao(codigoUsuario);
 	}
 
-	public void Deletar(int codigoAmizade) {
+	public void Deletar(int codigoAmigo) throws Exception {
+		
+		try {
+			
+			String sql = "DELETE FROM public.amizade WHERE codigo_do_amigo = "+codigoAmigo;
+			
+			Connection cnn = util.Conexao.getConexao();
+			PreparedStatement prd = cnn.prepareStatement(sql);
+
+
+			prd.execute();
+			
+			
+		} catch (Exception e) {
+			
+			throw new Exception(e.getMessage());
+		}
 
 	}
 

@@ -19,7 +19,7 @@ public class NAmizade {
 	public void AtualizarAmizade(EAmizade amizade) throws SQLException{
 		_PAmizade.Altualizar(amizade);
 	}
-	public void DesfazerAmizade(int codigoAmizade){
+	public void DesfazerAmizade(int codigoAmizade) throws Exception{
 		_PAmizade.Deletar(codigoAmizade);
 	}
 	public List<EPerfilUsuario> ListarAmigos(int codigoUsuario) throws SQLException{
@@ -27,7 +27,7 @@ public class NAmizade {
 		return _PAmizade.Listar(codigoUsuario);
 		
 	}
-    public List<EPerfilUsuario> ListarSolicitacoes(){
+    public List<EPerfilUsuario> ListarSolicitacoes() throws SQLException{
 		
 		return _PAmizade.ListarSolicitaco(NAcesso.EPerfilUsuarioLogado.getCodigo());
 		
