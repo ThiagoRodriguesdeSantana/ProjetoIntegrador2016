@@ -67,7 +67,7 @@ public class NPerfilUsuario {
 		return _PPerfilUsuario.Consultar(acesso);
 	}
 	
-	public void PostarConteudo(EPostagem ePostagem){
+	public void PostarConteudo(EPostagem ePostagem) throws SQLException{
 		
 		_NPostagem.Postar(ePostagem);
 		
@@ -99,9 +99,9 @@ public class NPerfilUsuario {
 		_NMensagem.LerMensagem(mensagem.getCodigo());
 	}
 	
-	public List<EPostagem> ListarPostagem(int codigoUsuario, LocalDateTime inicio, LocalDateTime fim){
+	public List<EPostagem> ListarPostagem(int codigoUsuario) throws SQLException{
 		
-		return _NPostagem.ListarPostagem(codigoUsuario, inicio, fim);
+		return _NPostagem.ListarPostagem(codigoUsuario);
 	}
 	
 	
