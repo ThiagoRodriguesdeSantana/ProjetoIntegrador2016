@@ -1,7 +1,6 @@
 package entidade;
 
-import java.awt.image.BufferedImage;
-import java.time.LocalDate;
+import java.sql.Date;
 
 public class EPostagem {
 
@@ -9,8 +8,15 @@ public class EPostagem {
 	private byte[] imagem;
 	private String mensagem;
 	private EPerfilUsuario usuario;
-	private LocalDate data;
+	private Date data;
+	private String nome;
 	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public int getCodigo() {
 		return codigo;
 	}
@@ -35,10 +41,10 @@ public class EPostagem {
 	public void setUsuario(EPerfilUsuario usuario) {
 		this.usuario = usuario;
 	}
-	public LocalDate getData() {
+	public Date getData() {
 		return data;
 	}
-	public void setData(LocalDate data) {
+	public void setData(Date data) {
 		this.data = data;
 	}
 	

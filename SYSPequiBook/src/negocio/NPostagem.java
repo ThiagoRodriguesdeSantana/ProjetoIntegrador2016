@@ -1,5 +1,6 @@
 package negocio;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -10,18 +11,18 @@ public class NPostagem {
 	
 	private PPostagem _PPostagem = new PPostagem();
 
-	public void Postar(EPostagem ePostagem){
+	public void Postar(EPostagem ePostagem) throws SQLException{
 		
 		_PPostagem.Salvar(ePostagem);
 		
 	}
-	public void ExcuirPstagem(int codigoPstagem){
+	public void ExcuirPstagem(int codigoPostagem) throws SQLException{
 		
-		_PPostagem.Excuir(codigoPstagem);
+		_PPostagem.Excluir(codigoPostagem);
 		
 	}
-	public List<EPostagem> ListarPostagem(int codigoUsuario, LocalDateTime dataIni, LocalDateTime dataFim){
-		return _PPostagem.Listar(codigoUsuario, dataIni, dataFim);
+	public List<EPostagem> ListarPostagem(int codigoUsuario) throws SQLException{
+		return _PPostagem.Listar(codigoUsuario);
 	}
 	public void AtualizarPstagem(EPostagem ePostagem){
 		 
