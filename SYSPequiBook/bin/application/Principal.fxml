@@ -42,7 +42,7 @@
             </Button>
             <ImageView fitHeight="150.0" fitWidth="50.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/PequiBook%20%20Logo%202%20pequena.png" />
+                  <Image url="@../imagem/PequiBook%20%20Logo%202%20pequena.png" />
                </image>
             </ImageView>
             <Label layoutX="54.0" layoutY="308.0" text="Solicitações">
@@ -68,7 +68,7 @@
             </Label>
             <ImageView fitHeight="45.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/logo%20pg%20inicial.png" />
+                  <Image url="@../imagem/logo%20pg%20inicial.png" />
                </image>
             </ImageView>
             <Label layoutX="558.0" layoutY="10.0" text="Eduardo Carvalho Roloff">
@@ -105,7 +105,7 @@
             </TableView>
             <ImageView fitHeight="150.0" fitWidth="50.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/PequiBook%20%20Logo%202%20pequena.png" />
+                  <Image url="@../imagem/PequiBook%20%20Logo%202%20pequena.png" />
                </image>
             </ImageView>
             <Label layoutX="62.0" layoutY="305.0" text="Pessoas Online">
@@ -115,12 +115,12 @@
             </Label>
             <ImageView fitHeight="91.0" fitWidth="37.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/add%20Postagem.png" />
+                  <Image url="@../imagem/add%20Postagem.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="91.0" fitWidth="37.0" layoutX="7.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/remove%20Postagem.png" />
+                  <Image url="@../imagem/remove%20Postagem.png" />
                </image>
             </ImageView>
             <Button layoutX="44.0" layoutY="8.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="136.0" style="-fx-background-color: ffb700;" text="Adicionar Postagem">
@@ -149,9 +149,9 @@
       </Pane>
       <ImageView fitHeight="458.0" fitWidth="458.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/fundo%20time%20line.png" />
+            <Image url="@../imagem/fundo%20time%20line.png" />
          </image>
       </ImageView>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane prefHeight="45.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
