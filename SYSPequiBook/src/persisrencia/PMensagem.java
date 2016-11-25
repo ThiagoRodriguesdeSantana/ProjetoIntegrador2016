@@ -15,8 +15,14 @@ public class PMensagem {
 	public void Salvar(EMensagem eMensagem) throws Exception {
 
 		try {
-			String sql = "INSERT INTO public.mensagem" + "(id_mensagem," + "codigo_destinatario," + "mensagem,"
-					+ "visualizado," + "id_perfil_usuario)" + " VALUES (?, ?, ?, ?, ?);";
+			String sql = "INSERT INTO public.mensagem"
+					+ "(id_mensagem,"
+					+ "codigo_destinatario,"
+					+ "mensagem,"
+					+ "visualizado,"
+					+ "id_perfil_usuario)" 
+					+ "nome"
+					+ " VALUES (?, ?, ?, ?, ?, ?);";
 
 			Connection cnn = util.Conexao.getConexao();
 			PreparedStatement ps = cnn.prepareStatement(sql);
@@ -26,6 +32,7 @@ public class PMensagem {
 			ps.setString(3, eMensagem.getMensagem());
 			ps.setDate(4, eMensagem.getDataHoraEnvio());
 			ps.setBoolean(4, eMensagem.isLido());
+			ps.setString(6, eMensagem.getNome());
 
 			ps.execute();
 
@@ -56,6 +63,7 @@ public class PMensagem {
 				mensagem.setMensagem(rs.getString("mensagem"));
 				mensagem.setLido(rs.getBoolean("visualizado"));
 				mensagem.setCodigoRemetente(rs.getInt("id_perfil_usuario"));
+				mensagem.setNome(rs.getString("nome"));
 				
 				list.add(mensagem);
 				

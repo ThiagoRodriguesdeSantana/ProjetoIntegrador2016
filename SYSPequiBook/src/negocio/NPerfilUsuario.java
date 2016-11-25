@@ -86,17 +86,17 @@ public class NPerfilUsuario {
 		
 		_NAmizade.AtualizarAmizade(amizade);
 	}
-	public void EnviarMensagem(EMensagem mensagem){
+	public void EnviarMensagem(EMensagem mensagem) throws Exception{
 		
 		_NMensagem.EnviarMensagem(mensagem);
 		
 	}
-	public List<EMensagem> ReceberMensagem(int codigoUsuario){
+	/*public List<EMensagem> ReceberMensagem(int codigoUsuario) throws Exception{
 		
-		return _NMensagem.ListarMensagens(codigoUsuario);
-	}
-	public void LerMensagem(EMensagem mensagem){
-		_NMensagem.LerMensagem(mensagem.getCodigo());
+		return _NMensagem.ListarMensagens();
+	}*/
+	public void LerMensagem(EMensagem mensagem) throws Exception{
+		_NMensagem.LerMensagem(mensagem);
 	}
 	
 	public List<EPostagem> ListarPostagem(int codigoUsuario) throws SQLException{
