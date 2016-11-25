@@ -11,7 +11,14 @@ public class EMensagem {
 	private String mensagem;
 	private Date dataHoraEnvio;
 	private boolean lido;
+	private String nome;
 	
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	public Date getDataHoraEnvio() {
 		return dataHoraEnvio;
 	}
