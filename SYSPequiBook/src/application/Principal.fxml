@@ -61,7 +61,7 @@
          </children></Pane>
       <Pane prefHeight="45.0" prefWidth="872.0" style="-fx-background-color: white;">
          <children>
-            <Label layoutX="199.0" layoutY="15.0" text="Pesquisar">
+            <Label layoutX="199.0" layoutY="13.0" text="Pesquisar">
                <font>
                   <Font name="Candara Bold" size="12.0" />
                </font>
@@ -71,12 +71,23 @@
                   <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/logo%20pg%20inicial.png" />
                </image>
             </ImageView>
-            <Label layoutX="559.0" layoutY="12.0" text="Eduardo Carvalho Roloff">
+            <Label layoutX="558.0" layoutY="10.0" text="Eduardo Carvalho Roloff">
                <font>
                   <Font name="Candara Bold" size="18.0" />
                </font>
             </Label>
-            <ComboBox editable="true" layoutX="249.0" layoutY="11.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="229.0" promptText="Pesquise um Amigo" style="-fx-background-color: white; -fx-border-color: gray;" />
+            <ComboBox editable="true" layoutX="249.0" layoutY="7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="229.0" promptText="Pesquise um Amigo" style="-fx-background-color: white; -fx-border-color: gray;" />
+            <Button layoutX="760.0" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: ffb700;" text="Sair">
+               <effect>
+                  <Glow level="0.0" />
+               </effect>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -141,5 +152,6 @@
             <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/fundo%20time%20line.png" />
          </image>
       </ImageView>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
    </children>
 </AnchorPane>
