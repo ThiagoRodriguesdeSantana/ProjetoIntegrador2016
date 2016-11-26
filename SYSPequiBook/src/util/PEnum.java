@@ -1,6 +1,6 @@
 package util;
 
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,75 +12,94 @@ import entidade.StatusRelacionamento;
 
 public class PEnum {
 
-	public static int CodigoStatusPerfil(StatusPerfil perfil) throws SQLException {
+    public static int CodigoStatusPerfil(StatusPerfil perfil, Connection conn) throws SQLException, Exception {
 
-		String sql = "SELECT id_status_perfil FROM public.status_perfil where descricao = '" + perfil + "';";
+        try {
 
-		Connection conn = util.Conexao.getConexao();
+            String sql = "SELECT id_status_perfil FROM public.status_perfil where descricao = '" + perfil + "';";
 
-		Statement st = (Statement) conn.createStatement();
-		ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+            conn = util.Conexao.getConexao();
 
-		int codigo = 0;
-		while (rs.next()) {
-			codigo = rs.getInt("id_status_perfil");
-		}
-		conn.close();
-		return codigo;
+            int codigo;
+            try (Statement st = conn.createStatement()) {
+                ResultSet rs = st.executeQuery(sql);
+                codigo = 0;
+                while (rs.next()) {
+                    codigo = rs.getInt("id_status_perfil");
+                }
+            }
 
-	}
+            return codigo;
 
-	public static int CodigoStatusRelacionamento(StatusRelacionamento perfil) throws SQLException {
+        } catch (Exception e) {
 
-		String sql = "SELECT id_relacionamento FROM public.status_relacionamento where descricao = '" + perfil + "';";
+            throw new Exception(e.getMessage());
+        }
 
-		Connection conn = util.Conexao.getConexao();
+    }
 
-		Statement st = (Statement) conn.createStatement();
-		ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+    public static int CodigoStatusRelacionamento(StatusRelacionamento perfil, Connection conn) throws SQLException, Exception {
+        try {
+            String sql = "SELECT id_relacionamento FROM public.status_relacionamento where descricao = '" + perfil + "';";
 
-		int codigo = 0;
-		while (rs.next()) {
-			codigo = rs.getInt("id_relacionamento");
-		}
-		conn.close();
-		return codigo;
+            conn = util.Conexao.getConexao();
 
-	}
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
 
-	public static int CodigoStatusLogin(StatusLogin perfil) throws SQLException {
+            int codigo = 0;
+            while (rs.next()) {
+                codigo = rs.getInt("id_relacionamento");
+            }
 
-		String sql = "SELECT id_status_perfil FROM public.status_perfil where descricao = '" + perfil + "';";
+            return codigo;
 
-		Connection conn = util.Conexao.getConexao();
+        } catch (Exception e) {
 
-		Statement st = (Statement) conn.createStatement();
-		ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+            throw new Exception(e.getMessage());
+        }
 
-		int codigo = 0;
-		while (rs.next()) {
-			codigo = rs.getInt("id_status_perfil");
-		}
-		conn.close();
-		return codigo;
+    }
 
-	}
-	public static int CodigoStatusSolicitacao(StatusDaSolicitacao perfil) throws SQLException {
+    public static int CodigoStatusLogin(StatusLogin perfil, Connection conn) throws SQLException {
 
-		String sql = "SELECT id_status_da_solicitacao  FROM public.status_da_solicitacao where descricao = '" + perfil + "';";
+        String sql = "SELECT id_status_perfil FROM public.status_perfil where descricao = '" + perfil + "';";
 
-		Connection conn = util.Conexao.getConexao();
+        conn = util.Conexao.getConexao();
 
-		Statement st = (Statement) conn.createStatement();
-		ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
 
-		int codigo = 0;
-		while (rs.next()) {
-			codigo = rs.getInt("id_status_da_solicitacao");
-		}
-		conn.close();
-		return codigo;
+        int codigo = 0;
+        while (rs.next()) {
+            codigo = rs.getInt("id_status_perfil");
+        }
 
-	}
+        return codigo;
+
+    }
+
+    public static int CodigoStatusSolicitacao(StatusDaSolicitacao perfil, Connection conn) throws SQLException, Exception {
+
+        try {
+            String sql = "SELECT id_status_da_solicitacao  FROM public.status_da_solicitacao where descricao = '" + perfil + "';";
+
+            conn = util.Conexao.getConexao();
+
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+
+            int codigo = 0;
+            while (rs.next()) {
+                codigo = rs.getInt("id_status_da_solicitacao");
+            }
+
+            return codigo;
+        } catch (Exception e) {
+
+            throw new Exception(e.getMessage());
+        }
+
+    }
 
 }

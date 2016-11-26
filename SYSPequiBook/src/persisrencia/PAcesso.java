@@ -1,125 +1,118 @@
 package persisrencia;
 
-import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.time.Period;
 
 import entidade.EAcesso;
 import entidade.EPerfilUsuario;
 
 public class PAcesso {
 
-	
-	
-	public void Salvar(EPerfilUsuario perfilUsuario) throws SQLException {
+    public void Salvar(EPerfilUsuario perfilUsuario) throws SQLException {
 
-		Connection con = util.Conexao.getConexao();
+        Connection con = util.Conexao.getConexao();
 
-		con.setAutoCommit(false);
-		try {
-			String sql = "INSERT INTO public.acesso(senha, email)VALUES (?, ?)";
+        con.setAutoCommit(false);
+        try {
+            String sql = "INSERT INTO public.acesso(senha, email)VALUES (?, ?)";
 
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setString(1, perfilUsuario.getAcesso().getEmail());
-			ps.setString(2, perfilUsuario.getAcesso().getSenha());
-			
-			ps.execute();
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setString(1, perfilUsuario.getAcesso().getEmail());
+            ps.setString(2, perfilUsuario.getAcesso().getSenha());
 
-			String sql2 = "SELECT id_acesso FROM public.acesso "
-					+ "where email = '"+perfilUsuario.getAcesso().getEmail()+"'"
-					+ " and senha ='"+perfilUsuario.getAcesso().getSenha()+"'";
-			
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql2);
+            ps.execute();
 
-			int teste = rs.getInt("id_acesso");
-			
-			if (rs.next()) {
-				perfilUsuario.getAcesso().setCodigo(rs.getInt(teste));
-			}
-			rs.close();
+            String sql2 = "SELECT currval('acesso_id_acesso_seq') as codigo";
 
-			PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
-			_PerfilUsuario.Salvar(perfilUsuario,con);
+            Statement st = con.createStatement();
+            try (ResultSet rs = st.executeQuery(sql2)) {
+                if (rs.next()) {
+                    int idAcesso = rs.getInt("codigo");
+                    perfilUsuario.getAcesso().setCodigo(idAcesso);
+                    
+                }
+            }
 
-			con.commit();
+            PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
+            _PerfilUsuario.Salvar(perfilUsuario, con);
 
-		} catch (Exception e) {
+            con.commit();
 
-			con.rollback();
-		}
-		con.close();
+        } catch (Exception e) {
 
-	}
+            con.rollback();
 
-	public void Deletar(EPerfilUsuario perfilUsuario) throws SQLException {
-		Connection con = util.Conexao.getConexao();
+            System.out.println(e.getMessage());
+        }
+        con.close();
 
-		con.setAutoCommit(false);
-		try {
-			
-			 PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
-			_PerfilUsuario.Excluir(perfilUsuario.getCodigo(),con);
-			
-			String sql = "DELETE FROM public.acesso WHERE email = ?";
+    }
 
-			Connection cnn = util.Conexao.getConexao();
-			PreparedStatement prd = cnn.prepareStatement(sql);
+    public void Deletar(EPerfilUsuario perfilUsuario) throws SQLException {
+        Connection con = util.Conexao.getConexao();
 
-			prd.setString(1, perfilUsuario.getAcesso().getEmail());
+        con.setAutoCommit(false);
+        try {
 
-			prd.execute();
-			
-			con.commit();
-			
-			con.close();
-			
-			
-		} catch (Exception e) {
-			
-			con.rollback();
-		}
+            PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
+            _PerfilUsuario.Excluir(perfilUsuario.getCodigo(), con);
 
-	}
+            String sql = "DELETE FROM public.acesso WHERE email = ?";
 
-	public EPerfilUsuario Cansultar(EAcesso acesso) throws SQLException {
-		PPerfilUsuario perfilUsuario = new PPerfilUsuario();
-		return perfilUsuario.Consultar(acesso);
+            Connection cnn = util.Conexao.getConexao();
+            PreparedStatement prd = cnn.prepareStatement(sql);
 
-	}
+            prd.setString(1, perfilUsuario.getAcesso().getEmail());
 
-	public void Atualizar(EPerfilUsuario perfilUsuario) throws SQLException {
+            prd.execute();
 
-		Connection con = util.Conexao.getConexao();
+            con.commit();
 
-		con.setAutoCommit(false);
-		try {
-			String sql = "UPDATE public.acesso"
-					+ " SET id_acesso=?,"
-					+ " senha=?,"
-					+ " email=?"
-					+ " WHERE email="+ perfilUsuario.getAcesso().getEmail();
+            con.close();
 
-			PreparedStatement ps = con.prepareStatement(sql);
-			ps.setInt(1, perfilUsuario.getCodigo());
-			ps.setString(2, perfilUsuario.getAcesso().getSenha());
-			ps.setString(3, perfilUsuario.getAcesso().getEmail());
-			
-			ps.execute();
+        } catch (Exception e) {
 
-			 PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
-			_PerfilUsuario.Editar(perfilUsuario,con);
+            con.rollback();
+        }
 
-			con.commit();
+    }
 
-		}
-		catch (Exception e) {
-			con.rollback();
-		}
-	
-	}
+    public EPerfilUsuario Cansultar(EAcesso acesso) throws SQLException {
+        PPerfilUsuario perfilUsuario = new PPerfilUsuario();
+        return perfilUsuario.Consultar(acesso);
+
+    }
+
+    public void Atualizar(EPerfilUsuario perfilUsuario) throws SQLException {
+
+        Connection con = util.Conexao.getConexao();
+
+        con.setAutoCommit(false);
+        try {
+            String sql = "UPDATE public.acesso"
+                    + " SET id_acesso=?,"
+                    + " senha=?,"
+                    + " email=?"
+                    + " WHERE email=" + perfilUsuario.getAcesso().getEmail();
+
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setInt(1, perfilUsuario.getCodigo());
+            ps.setString(2, perfilUsuario.getAcesso().getSenha());
+            ps.setString(3, perfilUsuario.getAcesso().getEmail());
+
+            ps.execute();
+
+            PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
+            _PerfilUsuario.Editar(perfilUsuario, con);
+
+            con.commit();
+
+        } catch (Exception e) {
+            con.rollback();
+        }
+
+    }
 }

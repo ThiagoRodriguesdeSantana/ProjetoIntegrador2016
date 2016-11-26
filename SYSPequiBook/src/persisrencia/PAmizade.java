@@ -12,7 +12,7 @@ import negocio.NAcesso;
 
 public class PAmizade {
 
-	public void Inserir(EAmizade amizade) throws SQLException {
+	public void Inserir(EAmizade amizade) throws SQLException, Exception {
 
 		String sql = "INSERT INTO public.amizade" + "(codigo_do_amigo, id_perfil_usuario, id_status_da_solicitacao)"
 				+ "VALUES (?, ?, ?)";
@@ -22,13 +22,13 @@ public class PAmizade {
 		
 		ps.setInt(1, amizade.getCodigo());
 		ps.setInt(2, NAcesso.EPerfilUsuarioLogado.getCodigo());
-		ps.setInt(3, util.PEnum.CodigoStatusSolicitacao(amizade.getDaSolicitacao()));
+		ps.setInt(3, util.PEnum.CodigoStatusSolicitacao(amizade.getDaSolicitacao(),con));
 		
 		ps.execute();
 
 	}
 
-	public void Altualizar(EAmizade amizade) throws SQLException {
+	public void Altualizar(EAmizade amizade) throws SQLException, Exception {
 
 		String sql = "UPDATE public.amizade SET "
 				+ "id_amizade=?,"
@@ -43,7 +43,7 @@ public class PAmizade {
 		ps.setInt(1, amizade.getCodigo());
 		ps.setInt(2, amizade.getCodigo());
 		ps.setInt(3, NAcesso.EPerfilUsuarioLogado.getCodigo());
-		ps.setInt(4, util.PEnum.CodigoStatusSolicitacao(amizade.getDaSolicitacao()));
+		ps.setInt(4, util.PEnum.CodigoStatusSolicitacao(amizade.getDaSolicitacao(),con));
 		
 		ps.execute();
 		
