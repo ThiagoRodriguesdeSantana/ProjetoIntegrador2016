@@ -148,6 +148,7 @@
             </Button>
          </children>
       </Pane>
+<<<<<<< HEAD
       <AnchorPane prefHeight="45.0" prefWidth="200.0" />
       <Pane layoutX="200.0" layoutY="31.0" prefHeight="596.0" prefWidth="457.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="215.0" AnchorPane.topAnchor="31.0">
          <children>
@@ -158,5 +159,13 @@
             </ImageView>
          </children>
       </Pane>
+=======
+      <ImageView fitHeight="458.0" fitWidth="458.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../imagem/fundo%20time%20line.png" />
+         </image>
+      </ImageView>
+      <AnchorPane prefHeight="45.0" prefWidth="200.0" />
+>>>>>>> 92597fa2139065779d32a754f1a0d3acc5bf68a9
    </children>
 </AnchorPane>
