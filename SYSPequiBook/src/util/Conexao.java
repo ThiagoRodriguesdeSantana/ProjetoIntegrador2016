@@ -11,6 +11,7 @@ public class Conexao {
 	private static Connection Conectar() {
 		try {
 			Class.forName("org.postgresql.Driver");
+			
 			return DriverManager.getConnection("jdbc:postgresql://localhost/pequibook", "postgres", "sap@123");
 		} catch (ClassNotFoundException e) {
 			System.out.println("Driver não encontrado no CLASSPATH");

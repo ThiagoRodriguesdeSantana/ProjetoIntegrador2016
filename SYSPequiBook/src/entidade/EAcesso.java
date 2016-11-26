@@ -8,6 +8,10 @@ public class EAcesso {
 	private String Senha;
 	
 	
+	public EAcesso(){
+		
+	}
+	
 	public int getCodigo() {
 		return codigo;
 	}

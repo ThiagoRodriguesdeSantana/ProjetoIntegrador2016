@@ -1,6 +1,6 @@
 package persisrencia;
 
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,8 +51,8 @@ public class PMensagem {
 					+ false;
 			Connection conn = util.Conexao.getConexao();
 
-			Statement st = (Statement) conn.createStatement();
-			ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+			Statement st = conn.createStatement();
+			ResultSet rs =  st.executeQuery(sql);
 			List<EMensagem> list = new ArrayList<>();
 
 			while(rs.next()){

@@ -9,23 +9,31 @@ import persisrencia.PPostagem;
 
 public class NPostagem {
 	
-	private PPostagem _PPostagem = new PPostagem();
+	private PPostagem _PPostagem;
+	
+	public NPostagem(){
+		
+	}
 
 	public void Postar(EPostagem ePostagem) throws SQLException{
 		
+		_PPostagem = new PPostagem();
 		_PPostagem.Salvar(ePostagem);
 		
 	}
 	public void ExcuirPstagem(int codigoPostagem) throws SQLException{
 		
+		_PPostagem = new PPostagem();
 		_PPostagem.Excluir(codigoPostagem);
 		
 	}
 	public List<EPostagem> ListarPostagem(int codigoUsuario) throws SQLException{
+		_PPostagem = new PPostagem();
 		return _PPostagem.Listar(codigoUsuario);
 	}
 	public void AtualizarPstagem(EPostagem ePostagem){
-		 
+		
+		_PPostagem = new PPostagem();
 		_PPostagem.Atualizar(ePostagem);
 	}
 	

@@ -15,6 +15,11 @@ public class EPerfilUsuario {
 	private boolean statusLogin;
 	
 	
+	public EPerfilUsuario(){
+		
+		this.acesso = new EAcesso();
+	}
+	
 	public int getCodigo() {
 		return codigo;
 	}

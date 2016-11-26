@@ -1,10 +1,11 @@
 package persisrencia;
 
-import java.beans.Statement;
+import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.time.Period;
 
 import entidade.EAcesso;
@@ -12,7 +13,7 @@ import entidade.EPerfilUsuario;
 
 public class PAcesso {
 
-	private PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
+	
 	
 	public void Salvar(EPerfilUsuario perfilUsuario) throws SQLException {
 
@@ -25,18 +26,24 @@ public class PAcesso {
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, perfilUsuario.getAcesso().getEmail());
 			ps.setString(2, perfilUsuario.getAcesso().getSenha());
+			
 			ps.execute();
 
-			String sql2 = "SELECT currval('codigo_acesso_seq') as codigo";
-			Statement st = (Statement) con.createStatement();
-			ResultSet rs = ((java.sql.Statement) st).executeQuery(sql2);
+			String sql2 = "SELECT id_acesso FROM public.acesso "
+					+ "where email = '"+perfilUsuario.getAcesso().getEmail()+"'"
+					+ " and senha ='"+perfilUsuario.getAcesso().getSenha()+"'";
+			
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(sql2);
 
+			int teste = rs.getInt("id_acesso");
+			
 			if (rs.next()) {
-				perfilUsuario.getAcesso().setCodigo(rs.getInt("codigo"));
+				perfilUsuario.getAcesso().setCodigo(rs.getInt(teste));
 			}
 			rs.close();
 
-			
+			PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
 			_PerfilUsuario.Salvar(perfilUsuario,con);
 
 			con.commit();
@@ -55,6 +62,7 @@ public class PAcesso {
 		con.setAutoCommit(false);
 		try {
 			
+			 PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
 			_PerfilUsuario.Excluir(perfilUsuario.getCodigo(),con);
 			
 			String sql = "DELETE FROM public.acesso WHERE email = ?";
@@ -103,6 +111,7 @@ public class PAcesso {
 			
 			ps.execute();
 
+			 PPerfilUsuario _PerfilUsuario = new PPerfilUsuario();
 			_PerfilUsuario.Editar(perfilUsuario,con);
 
 			con.commit();

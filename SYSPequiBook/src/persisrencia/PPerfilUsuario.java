@@ -1,6 +1,6 @@
 package persisrencia;
 
-import java.beans.Statement;
+import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,6 +66,7 @@ public class PPerfilUsuario {
 				+ " id_acesso=?" + "WHERE id_perfil_usuario =" + perfilUsuario.getCodigo();
 
 		PreparedStatement ps = con.prepareStatement(sql);
+		
 		ps.setString(1, perfilUsuario.getNome());
 		ps.setString(2, perfilUsuario.getTelefone());
 		ps.setBytes(3, perfilUsuario.getFoto());
@@ -85,8 +86,8 @@ public class PPerfilUsuario {
 
 		Connection conn = util.Conexao.getConexao();
 
-		Statement st = (Statement) conn.createStatement();
-		ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery(sql);
 		List<EPerfilUsuario> list = new ArrayList<>();
 
 		while (rs.next()) {
@@ -121,8 +122,8 @@ public class PPerfilUsuario {
 
 		Connection conn = util.Conexao.getConexao();
 
-		Statement st = (Statement) conn.createStatement();
-		ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+		Statement st = conn.createStatement();
+		ResultSet rs = st.executeQuery(sql);
 		List<EPerfilUsuario> list = new ArrayList<>();
 
 		while (rs.next()) {
@@ -157,8 +158,8 @@ public class PPerfilUsuario {
 
 		Connection conn = util.Conexao.getConexao();
 
-		Statement st = (Statement) conn.createStatement();
-		ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+		Statement st = conn.createStatement();
+		ResultSet rs =  st.executeQuery(sql);
 		List<EPerfilUsuario> list = new ArrayList<>();
 
 		while (rs.next()) {
@@ -186,19 +187,19 @@ public class PPerfilUsuario {
 
 	public EPerfilUsuario Consultar(EAcesso acesso) throws SQLException {
 		String sql = "select * from perfil_usuario p " + "inner join acesso a on p.id_acesso = a.id_acesso "
-				+ "inner join status_relacionamento r on r.id_relacionamento = p.id_relacionamento"
-				+ "inner join status_perfil sp on sp.id_status_perfil = p.id_status_perfil" + " where a.email ="
-				+ acesso.getEmail() + "and a.senha =" + acesso.getSenha();
+				+ "inner join status_relacionamento r on r.id_relacionamento = p.id_relacionamento "
+				+ "inner join status_perfil sp on sp.id_status_perfil = p.id_status_perfil" + " where a.email = '"
+				+ acesso.getEmail() + "' and a.senha ='" + acesso.getSenha()+"'";
 
 		Connection conn = util.Conexao.getConexao();
 
-		Statement st = (Statement) conn.createStatement();
-		ResultSet rs = ((java.sql.Statement) st).executeQuery(sql);
+		Statement st = conn.createStatement();
+		ResultSet rs =  st.executeQuery(sql);
 
+		
 		EPerfilUsuario perfilUsuario = new EPerfilUsuario();
-
 		while (rs.next()) {
-
+			
 			perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
 			perfilUsuario.setNome(rs.getString("nome"));
 			acesso.setCodigo(rs.getInt("id_acesso"));
@@ -216,6 +217,8 @@ public class PPerfilUsuario {
 
 		}
 
+		EPerfilUsuario teste = perfilUsuario;
+		
 		return perfilUsuario;
 
 	}
