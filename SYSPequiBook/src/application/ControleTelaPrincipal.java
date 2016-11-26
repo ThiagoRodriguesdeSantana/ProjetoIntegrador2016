@@ -46,6 +46,10 @@ public class ControleTelaPrincipal implements Initializable{
 	@FXML
 	private TableView<TabelaMensagem> tblSolicitacoes;
 	@FXML
+	private TableView<TabelaTimeLine> tblTimeLine;
+	@FXML
+	private TableColumn<TabelaMensagem, javafx.scene.image.Image> colimagem;
+	@FXML
 	private TableColumn<TabelaMensagem, String> colUsuarios;
 	@FXML
 	private Label nomeUsuario;

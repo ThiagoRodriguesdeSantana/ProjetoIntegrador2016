@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="panePrincipal" prefHeight="840.0" prefWidth="1433.0" style="-fx-background-color: fcfcfc;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleTelaPrincipal">
+<AnchorPane fx:id="panePrincipal" prefHeight="863.0" prefWidth="1410.0" style="-fx-background-color: fcfcfc;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleTelaPrincipal">
    <children>
-      <Pane fx:id="pane1" layoutY="42.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="795.0" prefWidth="200.0" style="-fx-background-color: ffb700;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="42.0">
+      <Pane fx:id="pane1" layoutY="42.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="821.0" prefWidth="200.0" style="-fx-background-color: ffb700;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="42.0">
          <children>
             <Button fx:id="acessoPerfil" layoutX="9.0" layoutY="14.0" mnemonicParsing="false" onAction="#AcessarPerfil" prefHeight="45.0" prefWidth="181.0" style="-fx-background-color: ffb700; -fx-border-color: gray;" text="Acesse seu Perfil">
                <effect>
@@ -50,7 +50,7 @@
                   <Font name="Candara Bold" size="18.0" />
                </font>
             </Label>
-            <TableView fx:id="tblSolicitacoes" layoutY="347.0" prefHeight="451.0" prefWidth="200.0">
+            <TableView fx:id="tblSolicitacoes" layoutY="347.0" prefHeight="474.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="colUsuarios" prefWidth="75.0" style="-fx-background-color: gray;" text="Nome" />
               </columns>
@@ -61,7 +61,7 @@
          </children></Pane>
       <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="872.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="406.0" layoutY="14.0" text="Pesquisar">
+            <Label layoutX="368.0" layoutY="13.0" text="Pesquisar">
                <font>
                   <Font name="Candara Bold" size="12.0" />
                </font>
@@ -71,13 +71,13 @@
                   <Image url="@../imagem/logo%20pg%20inicial.png" />
                </image>
             </ImageView>
-            <Label fx:id="nomeUsuario" layoutX="1115.0" layoutY="11.0" text="Eduardo Carvalho Roloff">
+            <Label fx:id="nomeUsuario" layoutX="1090.0" layoutY="12.0" text="Eduardo Carvalho Roloff">
                <font>
                   <Font name="Candara Bold" size="18.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cboPesquisaAmigos" editable="true" layoutX="465.0" layoutY="9.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="412.0" promptText="Pesquise um Amigo" style="-fx-background-color: white; -fx-border-color: gray;" />
-            <Button fx:id="btnSair" layoutX="1315.0" layoutY="9.0" mnemonicParsing="false" onAction="#Sair" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: ffb700;" text="Sair">
+            <ComboBox fx:id="cboPesquisaAmigos" editable="true" layoutX="425.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="482.0" promptText="Pesquise um Amigo" style="-fx-background-color: white; -fx-border-color: gray;" />
+            <Button fx:id="btnSair" layoutX="1292.0" layoutY="9.0" mnemonicParsing="false" onAction="#Sair" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: ffb700;" text="Sair">
                <effect>
                   <Glow level="0.0" />
                </effect>
@@ -94,9 +94,9 @@
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Pane>
-      <Pane layoutX="658.0" layoutY="42.0" prefHeight="795.0" prefWidth="215.0" style="-fx-background-color: grey;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
+      <Pane layoutX="658.0" layoutY="42.0" prefHeight="821.0" prefWidth="215.0" style="-fx-background-color: grey;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
          <children>
-            <TableView fx:id="tblMensagem" layoutY="348.0" prefHeight="445.0" prefWidth="215.0">
+            <TableView fx:id="tblMensagem" layoutY="348.0" prefHeight="474.0" prefWidth="215.0">
               <columns>
                 <TableColumn fx:id="texto" prefWidth="94.0" style="-fx-background-color: ffb700; -fx-border-color: ffb700;" text="Online" />
               </columns>
@@ -148,24 +148,11 @@
             </Button>
          </children>
       </Pane>
-<<<<<<< HEAD
       <AnchorPane prefHeight="45.0" prefWidth="200.0" />
-      <Pane layoutX="200.0" layoutY="31.0" prefHeight="596.0" prefWidth="457.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="215.0" AnchorPane.topAnchor="31.0">
-         <children>
-            <ImageView fx:id="imgTimaLine" fitHeight="499.0" fitWidth="412.0" layoutX="303.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../imagem/fundo%20time%20line.png" />
-               </image>
-            </ImageView>
-         </children>
-      </Pane>
-=======
-      <ImageView fitHeight="458.0" fitWidth="458.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../imagem/fundo%20time%20line.png" />
-         </image>
-      </ImageView>
-      <AnchorPane prefHeight="45.0" prefWidth="200.0" />
->>>>>>> 92597fa2139065779d32a754f1a0d3acc5bf68a9
+      <TableView fx:id="tblTimeLine" layoutX="200.0" layoutY="45.0" opacity="0.85" prefHeight="596.0" prefWidth="459.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="213.0" AnchorPane.topAnchor="42.0">
+        <columns>
+          <TableColumn fx:id="colimagem" prefWidth="996.0000152587891" text="C1" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
