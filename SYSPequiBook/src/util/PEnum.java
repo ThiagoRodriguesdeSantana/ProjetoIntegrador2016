@@ -16,7 +16,7 @@ public class PEnum {
 
         try {
 
-            String sql = "SELECT id_status_perfil FROM public.status_perfil where descricao = '" + perfil + "';";
+            String sql = "SELECT id_status_perfil FROM public.status_perfil where descricaoPerfil = '" + perfil + "';";
 
             conn = util.Conexao.getConexao();
 
@@ -40,7 +40,7 @@ public class PEnum {
 
     public static int CodigoStatusRelacionamento(StatusRelacionamento perfil, Connection conn) throws SQLException, Exception {
         try {
-            String sql = "SELECT id_relacionamento FROM public.status_relacionamento where descricao = '" + perfil + "';";
+            String sql = "SELECT id_relacionamento FROM public.status_relacionamento where descricaoRelacionamento = '" + perfil + "';";
 
             conn = util.Conexao.getConexao();
 
@@ -82,7 +82,7 @@ public class PEnum {
     public static int CodigoStatusSolicitacao(StatusDaSolicitacao perfil, Connection conn) throws SQLException, Exception {
 
         try {
-            String sql = "SELECT id_status_da_solicitacao  FROM public.status_da_solicitacao where descricao = '" + perfil + "';";
+            String sql = "SELECT id_status_da_solicitacao  FROM public.status_da_solicitacao where descricaoSolicitacao = '" + perfil + "';";
 
             conn = util.Conexao.getConexao();
 

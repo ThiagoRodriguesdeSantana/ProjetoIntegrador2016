@@ -15,12 +15,12 @@ public class NAmizade {
 	public NAmizade(){
 		
 	}
-	public void SolicitarAmizade(EAmizade amizade) throws SQLException{
+	public void SolicitarAmizade(EAmizade amizade) throws Exception{
 		_PAmizade = new PAmizade();
 		_PAmizade.Inserir(amizade);
 		
 	}
-	public void AtualizarAmizade(EAmizade amizade) throws SQLException{
+	public void AtualizarAmizade(EAmizade amizade) throws Exception{
 		_PAmizade = new PAmizade();
 		_PAmizade.Altualizar(amizade);
 	}

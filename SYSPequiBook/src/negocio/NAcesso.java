@@ -46,8 +46,13 @@ public class NAcesso {
 		_Acesso.Deletar(EPerfilUsuarioLogado);
 	}
 
-	public void Salvar(EPerfilUsuario perfilUsuario) throws SQLException {
+	public void Salvar(EPerfilUsuario perfilUsuario) throws Exception {
 		_Acesso = new PAcesso();
+		if(_Acesso.Cansultar(perfilUsuario.getAcesso()).getCodigo() !=0){
+			
+			throw new Exception("Já existe um usuario com este login e senha!");
+		}
+		
 		_Acesso.Salvar(perfilUsuario);
 	}
 

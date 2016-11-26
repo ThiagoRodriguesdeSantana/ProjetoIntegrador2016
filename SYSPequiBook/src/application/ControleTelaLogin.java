@@ -64,7 +64,6 @@ public class ControleTelaLogin implements Initializable {
 
             lblMessageError.setVisible(true);
             lblMessageError.setText(e.getMessage());
-            System.out.println(e.getMessage());
 
         }
 
@@ -77,12 +76,9 @@ public class ControleTelaLogin implements Initializable {
         acesso.setEmail(txtEmail.getText());
         acesso.setSenha(txtSenha.getText());
 
-        if (nAcesso.Logar(acesso).getCodigo() == 0) {
-            lblMessageError.setVisible(true);
-            lblMessageError.setText("Usuario não encotrado!");
-        } else {
-            AbrirTela(nAcesso.Logar(acesso));
-        }
+        EPerfilUsuario perfilUsuario = nAcesso.Logar(acesso);
+        
+        System.out.println("OK");
 
     }
 
@@ -99,6 +95,7 @@ public class ControleTelaLogin implements Initializable {
     private void Cadastrar(ActionEvent event) {
         try {
             CadastrarUsuario();
+            LimparCAmpos();
 
         } catch (Exception e) {
 
@@ -109,7 +106,15 @@ public class ControleTelaLogin implements Initializable {
 
     }
 
-    private void CadastrarUsuario() throws SQLException {
+    private void LimparCAmpos() {
+    	
+    	txtCadastroEmail.setText("");
+    	txtCadastroSenha.setText("");
+    	txtNome.setText("");
+    	txtTelefone.setText("");
+	}
+
+	private void CadastrarUsuario() throws Exception {
 
         EPerfilUsuario perfilUsuario = new EPerfilUsuario();
         NAcesso nAcesso = new NAcesso();

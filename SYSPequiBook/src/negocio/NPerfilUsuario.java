@@ -1,7 +1,6 @@
 package negocio;
 
 import java.sql.SQLException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import entidade.EAcesso;
@@ -87,7 +86,7 @@ public class NPerfilUsuario {
 
 	}
 
-	public void SolicitarAmizade(EAmizade amizade) throws SQLException {
+	public void SolicitarAmizade(EAmizade amizade) throws Exception {
 
 		_NAmizade = new NAmizade();
 		_NAmizade.SolicitarAmizade(amizade);
@@ -100,7 +99,7 @@ public class NPerfilUsuario {
 
 	}
 
-	public void ResponderSolicitacao(EAmizade amizade) throws SQLException {
+	public void ResponderSolicitacao(EAmizade amizade) throws Exception {
 
 		_NAmizade = new NAmizade();
 		_NAmizade.AtualizarAmizade(amizade);

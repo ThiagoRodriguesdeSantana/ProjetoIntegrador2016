@@ -17,7 +17,7 @@ public class PAcesso {
 
         con.setAutoCommit(false);
         try {
-            String sql = "INSERT INTO public.acesso(senha, email)VALUES (?, ?)";
+            String sql = "INSERT INTO public.acesso(email,senha)VALUES (?, ?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setString(1, perfilUsuario.getAcesso().getEmail());

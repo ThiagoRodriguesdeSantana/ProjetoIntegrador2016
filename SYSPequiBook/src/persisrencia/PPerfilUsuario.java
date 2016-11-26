@@ -19,9 +19,16 @@ public class PPerfilUsuario {
     public void Salvar(EPerfilUsuario perfilUsuario, Connection con) throws SQLException {
 
         try {
-            String sql = "INSERT INTO public.perfil_usuario("
-                    + "nome, telefone, status, foto, id_relacionamento, \n" +
-"            id_status_perfil, id_acesso, \"StatusLogin\") VALUES (?, ?, ?, ?, ?, ?,?, ?)";
+            String sql = "INSERT INTO public.perfil_usuario"
+            		+ "( nome,"
+            		+ " telefone,"
+            		+ " status,"
+            		+ " foto,"
+            		+ " id_relacionamento,"
+            		+ " id_status_perfil,"
+            		+ " id_acesso,"
+            		+ " \"StatusLogin\")"
+            		+ "VALUES (?, ?, ?, ?, ?,?, ?, ?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
             
@@ -185,10 +192,10 @@ public class PPerfilUsuario {
     }
 
     public EPerfilUsuario Consultar(EAcesso acesso) throws SQLException {
-        String sql = "select * from perfil_usuario p " + "inner join acesso a on p.id_acesso = a.id_acesso "
-                + "inner join status_relacionamento r on r.id_relacionamento = p.id_relacionamento "
-                + "inner join status_perfil sp on sp.id_status_perfil = p.id_status_perfil" + " where a.email = '"
-                + acesso.getEmail() + "' and a.senha ='" + acesso.getSenha() + "'";
+        String sql = "select * from perfil_usuario p inner join acesso a on p.id_acesso = a.id_acesso"
+        		+ " inner join status_relacionamento r on r.id_relacionamento = p.id_relacionamento "
+        		+ " inner join status_perfil sp on sp.id_status_perfil = p.id_status_perfil"
+        		+ " where email = '" + acesso.getEmail() + "' and senha ='" + acesso.getSenha() + "'";
 
         Connection conn = util.Conexao.getConexao();
 
@@ -206,12 +213,12 @@ public class PPerfilUsuario {
             perfilUsuario.setAcesso(acesso);
             perfilUsuario.setFoto(rs.getBytes("foto"));
             perfilUsuario.setStatus(rs.getString("status"));
-            StatusRelacionamento relacionamento = Enum.valueOf(StatusRelacionamento.class, rs.getString("r.descricao"));
+            StatusRelacionamento relacionamento = Enum.valueOf(StatusRelacionamento.class, rs.getString("descricaoRelacionamento"));
             perfilUsuario.setStatusRelacionamento(relacionamento);
             perfilUsuario.setTelefone(rs.getString("telefone"));
-            StatusPerfil perfil = Enum.valueOf(StatusPerfil.class, rs.getString("sp.descricao"));
+            StatusPerfil perfil = Enum.valueOf(StatusPerfil.class, rs.getString("descricaoPerfil"));
             perfilUsuario.setStatusPerfil(perfil);
-            perfilUsuario.setStatusLogin(rs.getBoolean("login"));
+            perfilUsuario.setStatusLogin(rs.getBoolean("StatusLogin"));
 
         }
 
