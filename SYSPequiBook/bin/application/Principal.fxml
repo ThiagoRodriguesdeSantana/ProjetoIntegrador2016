@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="596.0" prefWidth="872.0" style="-fx-background-color: fcfcfc;" xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="panePrincipal" prefHeight="840.0" prefWidth="1433.0" style="-fx-background-color: fcfcfc;" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ControleTelaPrincipal">
    <children>
-      <Pane layoutY="42.0" prefHeight="596.0" prefWidth="200.0" style="-fx-background-color: ffb700;">
+      <Pane fx:id="pane1" layoutY="42.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="795.0" prefWidth="200.0" style="-fx-background-color: ffb700;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="42.0">
          <children>
-            <Button layoutX="9.0" layoutY="14.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="181.0" style="-fx-background-color: ffb700; -fx-border-color: gray;" text="Acesse seu Perfil">
+            <Button fx:id="acessoPerfil" layoutX="9.0" layoutY="14.0" mnemonicParsing="false" onAction="#AcessarPerfil" prefHeight="45.0" prefWidth="181.0" style="-fx-background-color: ffb700; -fx-border-color: gray;" text="Acesse seu Perfil">
                <effect>
                   <Glow level="0.0" />
                </effect>
@@ -29,7 +29,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="9.0" layoutY="59.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="181.0" style="-fx-background-color: ffb700; -fx-border-color: gray;" text="Fotos">
+            <Button fx:id="fotos" layoutX="9.0" layoutY="59.0" mnemonicParsing="false" onAction="#VerFotos" prefHeight="45.0" prefWidth="181.0" style="-fx-background-color: ffb700; -fx-border-color: gray;" text="Fotos">
                <effect>
                   <Glow level="0.0" />
                </effect>
@@ -42,7 +42,7 @@
             </Button>
             <ImageView fitHeight="150.0" fitWidth="50.0" layoutY="287.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/PequiBook%20%20Logo%202%20pequena.png" />
+                  <Image url="@../imagem/PequiBook%20%20Logo%202%20pequena.png" />
                </image>
             </ImageView>
             <Label layoutX="54.0" layoutY="308.0" text="Solicitações">
@@ -50,34 +50,34 @@
                   <Font name="Candara Bold" size="18.0" />
                </font>
             </Label>
-            <TableView layoutY="347.0" prefHeight="250.0" prefWidth="200.0">
+            <TableView fx:id="tblSolicitacoes" layoutY="347.0" prefHeight="451.0" prefWidth="200.0">
               <columns>
-                <TableColumn prefWidth="75.0" style="-fx-background-color: gray;" text="Nome" />
+                <TableColumn fx:id="colUsuarios" prefWidth="75.0" style="-fx-background-color: gray;" text="Nome" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
          </children></Pane>
-      <Pane prefHeight="45.0" prefWidth="872.0" style="-fx-background-color: white;">
+      <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="872.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="199.0" layoutY="13.0" text="Pesquisar">
+            <Label layoutX="406.0" layoutY="14.0" text="Pesquisar">
                <font>
                   <Font name="Candara Bold" size="12.0" />
                </font>
             </Label>
             <ImageView fitHeight="45.0" fitWidth="181.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/logo%20pg%20inicial.png" />
+                  <Image url="@../imagem/logo%20pg%20inicial.png" />
                </image>
             </ImageView>
-            <Label layoutX="558.0" layoutY="10.0" text="Eduardo Carvalho Roloff">
+            <Label fx:id="nomeUsuario" layoutX="1115.0" layoutY="11.0" text="Eduardo Carvalho Roloff">
                <font>
                   <Font name="Candara Bold" size="18.0" />
                </font>
             </Label>
-            <ComboBox editable="true" layoutX="249.0" layoutY="7.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="229.0" promptText="Pesquise um Amigo" style="-fx-background-color: white; -fx-border-color: gray;" />
-            <Button layoutX="760.0" layoutY="7.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="104.0" style="-fx-background-color: ffb700;" text="Sair">
+            <ComboBox fx:id="cboPesquisaAmigos" editable="true" layoutX="465.0" layoutY="9.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="412.0" promptText="Pesquise um Amigo" style="-fx-background-color: white; -fx-border-color: gray;" />
+            <Button fx:id="btnSair" layoutX="1315.0" layoutY="9.0" mnemonicParsing="false" onAction="#Sair" prefHeight="27.0" prefWidth="115.0" style="-fx-background-color: ffb700;" text="Sair">
                <effect>
                   <Glow level="0.0" />
                </effect>
@@ -88,16 +88,17 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <AnchorPane layoutX="249.0" layoutY="7.0" />
          </children>
          <cursor>
             <Cursor fx:constant="DEFAULT" />
          </cursor>
       </Pane>
-      <Pane layoutX="658.0" layoutY="42.0" prefHeight="596.0" prefWidth="215.0" style="-fx-background-color: grey;">
+      <Pane layoutX="658.0" layoutY="42.0" prefHeight="795.0" prefWidth="215.0" style="-fx-background-color: grey;" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="42.0">
          <children>
-            <TableView layoutY="348.0" prefHeight="250.0" prefWidth="215.0">
+            <TableView fx:id="tblMensagem" layoutY="348.0" prefHeight="445.0" prefWidth="215.0">
               <columns>
-                <TableColumn prefWidth="94.0" style="-fx-background-color: ffb700; -fx-border-color: ffb700;" text="Online" />
+                <TableColumn fx:id="texto" prefWidth="94.0" style="-fx-background-color: ffb700; -fx-border-color: ffb700;" text="Online" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -105,7 +106,7 @@
             </TableView>
             <ImageView fitHeight="150.0" fitWidth="50.0" layoutY="284.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/PequiBook%20%20Logo%202%20pequena.png" />
+                  <Image url="@../imagem/PequiBook%20%20Logo%202%20pequena.png" />
                </image>
             </ImageView>
             <Label layoutX="62.0" layoutY="305.0" text="Pessoas Online">
@@ -115,15 +116,15 @@
             </Label>
             <ImageView fitHeight="91.0" fitWidth="37.0" layoutX="7.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/add%20Postagem.png" />
+                  <Image url="@../imagem/add%20Postagem.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="91.0" fitWidth="37.0" layoutX="7.0" layoutY="61.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/remove%20Postagem.png" />
+                  <Image url="@../imagem/remove%20Postagem.png" />
                </image>
             </ImageView>
-            <Button layoutX="44.0" layoutY="8.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="136.0" style="-fx-background-color: ffb700;" text="Adicionar Postagem">
+            <Button fx:id="btnAddPost" layoutX="44.0" layoutY="8.0" mnemonicParsing="false" onAction="#AdicionarPstagem" prefHeight="45.0" prefWidth="136.0" style="-fx-background-color: ffb700;" text="Adicionar Postagem">
                <effect>
                   <Glow level="0.0" />
                </effect>
@@ -134,7 +135,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
-            <Button layoutX="44.0" layoutY="62.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="136.0" style="-fx-background-color: ffb700;" text="Remover Postagem">
+            <Button fx:id="btnRemovePost" layoutX="44.0" layoutY="62.0" mnemonicParsing="false" onAction="#RemoverPstagem" prefHeight="45.0" prefWidth="136.0" style="-fx-background-color: ffb700;" text="Remover Postagem">
                <effect>
                   <Glow level="0.0" />
                </effect>
@@ -147,11 +148,15 @@
             </Button>
          </children>
       </Pane>
-      <ImageView fitHeight="458.0" fitWidth="458.0" layoutX="200.0" layoutY="94.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../../../../../Desktop/Faculdade%20ADS/3º%20Período/PROJETO%20INTEGRADOR/Logo/Pequi/fundo%20time%20line.png" />
-         </image>
-      </ImageView>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane prefHeight="45.0" prefWidth="200.0" />
+      <Pane layoutX="200.0" layoutY="31.0" prefHeight="596.0" prefWidth="457.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="200.0" AnchorPane.rightAnchor="215.0" AnchorPane.topAnchor="31.0">
+         <children>
+            <ImageView fx:id="imgTimaLine" fitHeight="499.0" fitWidth="412.0" layoutX="303.0" layoutY="192.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../imagem/fundo%20time%20line.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
    </children>
 </AnchorPane>
