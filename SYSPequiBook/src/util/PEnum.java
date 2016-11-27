@@ -16,7 +16,7 @@ public class PEnum {
 
         try {
 
-            String sql = "SELECT id_status_perfil FROM public.status_perfil where descricaoPerfil = '" + perfil + "';";
+            String sql = "SELECT id_status_perfil,* FROM public.status_perfil where \"descricaoPerfil\" =  '" + perfil + "';";
 
             conn = util.Conexao.getConexao();
 
@@ -40,7 +40,7 @@ public class PEnum {
 
     public static int CodigoStatusRelacionamento(StatusRelacionamento perfil, Connection conn) throws SQLException, Exception {
         try {
-            String sql = "SELECT id_relacionamento FROM public.status_relacionamento where descricaoRelacionamento = '" + perfil + "';";
+            String sql = "SELECT id_relacionamento FROM public.status_relacionamento where \"descricaoRelacionamento\" ='"+ perfil + "';";
 
             conn = util.Conexao.getConexao();
 
@@ -61,28 +61,11 @@ public class PEnum {
 
     }
 
-    public static int CodigoStatusLogin(StatusLogin perfil, Connection conn) throws SQLException {
-
-        String sql = "SELECT id_status_perfil FROM public.status_perfil where descricao = '" + perfil + "';";
-
-        conn = util.Conexao.getConexao();
-
-        Statement st = conn.createStatement();
-        ResultSet rs = st.executeQuery(sql);
-
-        int codigo = 0;
-        while (rs.next()) {
-            codigo = rs.getInt("id_status_perfil");
-        }
-
-        return codigo;
-
-    }
 
     public static int CodigoStatusSolicitacao(StatusDaSolicitacao perfil, Connection conn) throws SQLException, Exception {
 
         try {
-            String sql = "SELECT id_status_da_solicitacao  FROM public.status_da_solicitacao where descricaoSolicitacao = '" + perfil + "';";
+            String sql = "SELECT id_status_da_solicitacao FROM public.status_da_solicitacao where \"descricaoSolicitacao\" = '" + perfil + "';";
 
             conn = util.Conexao.getConexao();
 
