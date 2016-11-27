@@ -4,10 +4,13 @@ import java.awt.Image;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.Vector;
 
+import javax.swing.table.DefaultTableModel;
 import javax.swing.text.html.ImageView;
 
 import entidade.EMensagem;
+import entidade.EPostagem;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,6 +26,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import negocio.NAcesso;
 import negocio.NMensagem;
+import negocio.NPostagem;
 
 public class ControleTelaPrincipal implements Initializable{
 	
@@ -44,9 +48,10 @@ public class ControleTelaPrincipal implements Initializable{
 	@FXML
 	private ImageView imgTimaLine;
 	@FXML
-	private TableView<TabelaMensagem> tblSolicitacoes;
+	private TableView<EPostagem> tblTimeLine;
+	
 	@FXML
-	private TableView<TabelaTimeLine> tblTimeLine;
+	private TableView<TabelaMensagem> tblSolicitacoes;
 	@FXML
 	private TableColumn<TabelaMensagem, javafx.scene.image.Image> colimagem;
 	@FXML
@@ -62,9 +67,13 @@ public class ControleTelaPrincipal implements Initializable{
 	
 	private NMensagem nMensagem = new NMensagem();
 	
+	private NPostagem nPostagem = new NPostagem();
+	
 	List<EMensagem> listaMensagem;
 	
 	private ObservableList<TabelaMensagem> listMensage = FXCollections.observableArrayList();
+	
+	private ObservableList<EPostagem> listaPostagem;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -96,6 +105,21 @@ public class ControleTelaPrincipal implements Initializable{
 		tblMensagem.setItems(listMensage);
 		
 	}
+	
+	public void ListarPostagem(EPostagem ePostagem) throws Exception{
+		
+		//tblTimeLine = (TableView<EPostagem>) nPostagem.ListarPostagem(0);
+		
+		Vector post = new Vector();
+		for(EPostagem postagem : new NPostagem().ListarPostagem(ePostagem.getCodigo())){
+			Vector<Object> linha = new Vector<Object>();
+			linha.add(postagem.getNome());
+			linha.addElement(postagem.getData());
+			linha.add(postagem.getMensagem());
+			linha.add(postagem.getImagem());
+		}
+		 tblTimeLine.setItems(listaPostagem);
+	}
 	@FXML
 	private void AcessarPerfil(ActionEvent event){
 		
@@ -106,11 +130,11 @@ public class ControleTelaPrincipal implements Initializable{
 		
 	}
 	@FXML
-	private void AdicionarPstagem(ActionEvent event){
+	private void AdicionarPostagem(ActionEvent event){
 		
 	}
 	@FXML
-	private void RemoverPstagem(ActionEvent event){
+	private void RemoverPostagem(ActionEvent event){
 		
 	}
 	@FXML

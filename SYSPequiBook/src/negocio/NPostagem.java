@@ -21,7 +21,7 @@ public class NPostagem {
 		_PPostagem.Salvar(ePostagem);
 		
 	}
-	public void ExcuirPstagem(int codigoPostagem) throws SQLException{
+	public void ExcluirPostagem(int codigoPostagem) throws SQLException{
 		
 		_PPostagem = new PPostagem();
 		_PPostagem.Excluir(codigoPostagem);
@@ -31,7 +31,7 @@ public class NPostagem {
 		_PPostagem = new PPostagem();
 		return _PPostagem.Listar(codigoUsuario);
 	}
-	public void AtualizarPstagem(EPostagem ePostagem){
+	public void AtualizarPostagem(EPostagem ePostagem){
 		
 		_PPostagem = new PPostagem();
 		_PPostagem.Atualizar(ePostagem);
