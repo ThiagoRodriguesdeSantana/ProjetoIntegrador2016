@@ -40,5 +40,7 @@ public class NAmizade {
 		return _PAmizade.ListarSolicitaco(NAcesso.EPerfilUsuarioLogado.getCodigo());
 		
 	}
+    
+    
 	
 }

@@ -10,8 +10,10 @@ public class EPerfilUsuario {
 	private byte[] foto;
 	private String status;
 	private StatusPerfil statusPerfil;
+        public int idStatusPerfil;
 	private EAcesso acesso;
 	private StatusRelacionamento statusRelacionamento;
+        public int idStatusRelacionamento;
 	private boolean statusLogin;
 	
 	
@@ -74,5 +76,33 @@ public class EPerfilUsuario {
 	public void setStatusLogin(boolean statusLogin) {
 		this.statusLogin = statusLogin;
 	}
+
+    /**
+     * @return the idStatusRelacionamento
+     */
+    public int getIdStatusRelacionamento() {
+        return idStatusRelacionamento;
+    }
+
+    /**
+     * @param idStatusRelacionamento the idStatusRelacionamento to set
+     */
+    public void setIdStatusRelacionamento(int idStatusRelacionamento) {
+        this.idStatusRelacionamento = idStatusRelacionamento;
+    }
+
+    /**
+     * @return the idStatusPerfil
+     */
+    public int getIdStatusPerfil() {
+        return idStatusPerfil;
+    }
+
+    /**
+     * @param idStatusPerfil the idStatusPerfil to set
+     */
+    public void setIdStatusPerfil(int idStatusPerfil) {
+        this.idStatusPerfil = idStatusPerfil;
+    }
 
 }

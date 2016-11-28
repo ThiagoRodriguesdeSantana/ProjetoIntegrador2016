@@ -25,13 +25,13 @@ public class NPerfilUsuario {
 	public void SalvarPerfil(EPerfilUsuario ePerfilUsuario) throws Exception {
 
 		if (ePerfilUsuario.getAcesso().getEmail().equals(null)) {
-			throw new Exception("É necessário cadastrar um email!");
+			throw new Exception("ï¿½ necessï¿½rio cadastrar um email!");
 		}
 		if (ePerfilUsuario.getAcesso().getSenha().equals(null)) {
-			throw new Exception("É necessário cadastrar uma senha!");
+			throw new Exception("ï¿½ necessï¿½rio cadastrar uma senha!");
 		}
 		if (ePerfilUsuario.getNome().equals(null)) {
-			throw new Exception("É necessário cadastrar um nome ou apelido!");
+			throw new Exception("ï¿½ necessï¿½rio cadastrar um nome ou apelido!");
 		}
 
 		_NAcesso = new NAcesso();
@@ -129,5 +129,9 @@ public class NPerfilUsuario {
 		_NPostagem = new NPostagem();
 		return _NPostagem.ListarPostagem(codigoUsuario);
 	}
+        public List<EPerfilUsuario> ListarUsuarioOnLine() throws SQLException{
+            _PPerfilUsuario = new PPerfilUsuario();
+            return _PPerfilUsuario.ListarAmigosOnLine(NAcesso.EPerfilUsuarioLogado.getCodigo());
+        }
 
 }

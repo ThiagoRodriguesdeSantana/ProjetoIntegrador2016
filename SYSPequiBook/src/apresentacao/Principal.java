@@ -17,13 +17,18 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import negocio.NAcesso;
+import negocio.NAmizade;
+import negocio.NPerfilUsuario;
 
 /**
  *
@@ -36,7 +41,6 @@ public class Principal extends javax.swing.JFrame {
     private NAcesso _NAcesso = new NAcesso();
     private boolean _lbnEditarSenha = true;
 
-    JLabel image = new JLabel();
     File imagem;
 
     public Principal() {
@@ -45,14 +49,17 @@ public class Principal extends javax.swing.JFrame {
 
     }
 
-    public Principal(EPerfilUsuario perfilUsuario) {
+    public Principal(EPerfilUsuario perfilUsuario) throws SQLException {
 
         this();
 
-        _PerfilUsuario = perfilUsuario;
+        this._PerfilUsuario = perfilUsuario;
 
         PreencherControles();
         preencherComboBox();
+        PreencheTabelaSolicitacao();
+        PreencheTabelaAmigosOnline();
+        
 
     }
 
@@ -68,7 +75,7 @@ public class Principal extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        lbNome = new javax.swing.JLabel();
         btnEntrar = new javax.swing.JButton();
         cmbPesquisar = new javax.swing.JComboBox<String>();
         jSeparator1 = new javax.swing.JSeparator();
@@ -121,9 +128,9 @@ public class Principal extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Candara", 1, 12)); // NOI18N
         jLabel1.setText("Pesquisar");
 
-        jLabel3.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
-        jLabel3.setText("Eduardo Carvalho Roloff");
-        jLabel3.setToolTipText("");
+        lbNome.setFont(new java.awt.Font("Candara", 1, 18)); // NOI18N
+        lbNome.setText("Eduardo Carvalho Roloff");
+        lbNome.setToolTipText("");
 
         btnEntrar.setBackground(new java.awt.Color(255, 183, 0));
         btnEntrar.setFont(new java.awt.Font("Candara", 1, 12)); // NOI18N
@@ -143,7 +150,7 @@ public class Principal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(cmbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 381, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(181, 181, 181)
-                .addComponent(jLabel3)
+                .addComponent(lbNome)
                 .addGap(18, 18, 18)
                 .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -161,7 +168,7 @@ public class Principal extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lbNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEntrar)
                             .addComponent(cmbPesquisar, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -186,7 +193,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Online"
+
             }
         ));
         jScrollPane2.setViewportView(tblPessoasOnline);
@@ -311,11 +318,17 @@ public class Principal extends javax.swing.JFrame {
         pnlFoto.setLayout(pnlFotoLayout);
         pnlFotoLayout.setHorizontalGroup(
             pnlFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(pnlFotoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         pnlFotoLayout.setVerticalGroup(
             pnlFotoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lbFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+            .addGroup(pnlFotoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbFoto, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
@@ -452,8 +465,8 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(paneLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(paneLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnFoto, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                    .addComponent(pnlFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(pnlFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFoto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(147, Short.MAX_VALUE))
@@ -466,7 +479,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(paneLoginLayout.createSequentialGroup()
                         .addComponent(pnlFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFoto)))
                 .addContainerGap(322, Short.MAX_VALUE))
         );
@@ -480,7 +493,7 @@ public class Principal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Nome"
+
             }
         ));
         jScrollPane1.setViewportView(tblSolicitacoes);
@@ -512,8 +525,8 @@ public class Principal extends javax.swing.JFrame {
         try {
 
             AtualizarPerfil();
-            
-            JOptionPane.showMessageDialog(null,"Atualizado com sucesso!");
+
+            JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
 
         } catch (Exception e) {
 
@@ -525,7 +538,7 @@ public class Principal extends javax.swing.JFrame {
 
         if (_lbnEditarSenha) {
             pnlSenha.setVisible(true);
-            
+
             _lbnEditarSenha = false;
         } else {
             pnlSenha.setVisible(false);
@@ -591,7 +604,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -606,6 +618,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lbFoto;
+    private javax.swing.JLabel lbNome;
     private javax.swing.JPanel paneLogin;
     private javax.swing.JPanel pnlFoto;
     private javax.swing.JPanel pnlSenha;
@@ -622,14 +635,19 @@ public class Principal extends javax.swing.JFrame {
 
         try {
 
+            lbNome.setText(_PerfilUsuario.getNome());
             pnlSenha.setVisible(false);
 
             txtEmail.setText(_PerfilUsuario.getAcesso().getEmail());
             txtNome.setText(_PerfilUsuario.getNome());
             txtTelefone.setText(_PerfilUsuario.getTelefone());
-             cboRelacionamento.setSelectedItem(_PerfilUsuario.getStatusRelacionamento());
-             cboStatusPerfil.setSelectedItem(_PerfilUsuario.getStatusPerfil());
-            AbrirImagem(_PerfilUsuario.getFoto());
+            cboRelacionamento.setSelectedItem(_PerfilUsuario.getStatusRelacionamento());
+            cboStatusPerfil.setSelectedItem(_PerfilUsuario.getStatusPerfil().ordinal());
+            System.out.println(_PerfilUsuario.getStatusPerfil());
+
+            ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
+            icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
+            lbFoto.setIcon(icon);
 
         } catch (Exception e) {
 
@@ -692,15 +710,14 @@ public class Principal extends javax.swing.JFrame {
     private void AtualizarPerfil() throws IOException, SQLException {
 
         _Acesso = new EAcesso();
-        
+
         _Acesso.setCodigo(NAcesso.EPerfilUsuarioLogado.getAcesso().getCodigo());
-        if(txtNovaSenha.getText().isEmpty()){
+        if (txtNovaSenha.getText().isEmpty()) {
             _Acesso.setSenha(NAcesso.EPerfilUsuarioLogado.getAcesso().getSenha());
-        }
-        else{
+        } else {
             _Acesso.setSenha(txtNovaSenha.getText());
         }
-        
+
         _Acesso.setEmail(txtEmail.getText());
         _PerfilUsuario.setNome(txtNome.getText());
         _PerfilUsuario.setAcesso(_Acesso);
@@ -709,6 +726,7 @@ public class Principal extends javax.swing.JFrame {
         _PerfilUsuario.setStatusRelacionamento((StatusRelacionamento) cboRelacionamento.getSelectedItem());
 
         _NAcesso.EditarPerfil(_PerfilUsuario);
+
     }
 
     private void AbrirImagem(Object source) {
@@ -721,7 +739,7 @@ public class Principal extends javax.swing.JFrame {
         } else if (source instanceof byte[]) {
 
             ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
-            icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
+            icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 10, pnlFoto.getHeight() - 10, 100));
             lbFoto.setIcon(icon);
         }
     }
@@ -750,4 +768,61 @@ public class Principal extends javax.swing.JFrame {
         cboStatusPerfil.addItem(StatusPerfil.Privado);
         cboStatusPerfil.addItem(StatusPerfil.Publico);
     }
+    
+    
+    private void PreencheTabelaSolicitacao() throws SQLException {
+
+        Vector<String> cabecalho = new Vector<>();
+
+        cabecalho.add("Nome");
+        
+
+        Vector detalhe = new Vector();
+
+        NAmizade amizade = new NAmizade();
+
+        List<EPerfilUsuario> list = amizade.ListarSolicitacoes();
+
+        for (EPerfilUsuario item : list) {
+
+            Vector<String> linha = new Vector<>();
+            linha.add(item.getNome());
+          
+
+            detalhe.add(linha);
+
+        }
+        tblSolicitacoes.setModel(new DefaultTableModel(detalhe, cabecalho));
+    }
+
+    private void PreencheTabelaAmigosOnline() throws SQLException {
+       
+        NPerfilUsuario perfilUsuario = new NPerfilUsuario();
+        
+         Vector<String> cabecalho = new Vector<>();
+
+        cabecalho.add("Nome");
+        
+
+        Vector detalhe = new Vector();
+
+        
+
+        List<EPerfilUsuario> list = perfilUsuario.ListarUsuarioOnLine();
+
+        for (EPerfilUsuario item : list) {
+
+            Vector<String> linha = new Vector<>();
+            linha.add(item.getNome());
+          
+
+            detalhe.add(linha);
+
+        }
+        tblPessoasOnline.setModel(new DefaultTableModel(detalhe, cabecalho));
+        
+        
+        
+    }
+
 }

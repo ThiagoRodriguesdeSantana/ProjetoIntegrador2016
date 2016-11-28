@@ -163,15 +163,19 @@ public class PPerfilUsuario {
 
     public List<EPerfilUsuario> ListarSolicitacao(int codigoUsuario) throws SQLException {
 
-        String sql = "select * from perfil_usuario p inner join amizade a on a.id_perfil_usuario = p.id_perfil_usuario"
-                + "inner join status_da_solicitacao s on a.id_status_da_solicitacao = s.id_status_da_solicitacao"
-                + "where s.descricao = '" + StatusDaSolicitacao.Enviado + "'" + "end p.id_codigo_do_amigo = "
-                + codigoUsuario;
+        String sql = "select * from perfil_usuario p "
+                + " inner join amizade a "
+                + " on a.id_perfil_usuario = p.id_perfil_usuario "
+                + " inner join status_da_solicitacao s "
+                + " on a.id_status_da_solicitacao = s.id_status_da_solicitacao"
+                + " where s.\"descricaoSolicitacao\" = '"+StatusDaSolicitacao.Enviado+"' and a.codigo_do_amigo = "+codigoUsuario;
+                
 
         Connection conn = util.Conexao.getConexao();
 
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(sql);
+        
         List<EPerfilUsuario> list = new ArrayList<>();
 
         while (rs.next()) {
@@ -228,9 +232,42 @@ public class PPerfilUsuario {
 
         }
 
-        EPerfilUsuario teste = perfilUsuario;
 
         return perfilUsuario;
+
+    }
+     public List<EPerfilUsuario> ListarAmigosOnLine(int codigoUsuario) throws SQLException {
+
+        String sql = "select * from amizade a  left join perfil_usuario p"
+                + " on a.id_perfil_usuario = p.id_perfil_usuario"
+                + " where a.id_perfil_usuario = "+codigoUsuario+" "
+                + " or codigo_do_amigo = "+codigoUsuario;
+               
+
+        Connection conn = util.Conexao.getConexao();
+
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+        List<EPerfilUsuario> list = new ArrayList<>();
+
+        while (rs.next()) {
+
+            EPerfilUsuario perfilUsuario = new EPerfilUsuario();
+
+            perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
+            perfilUsuario.setNome(rs.getString("nome"));
+            perfilUsuario.setFoto(rs.getBytes("foto"));
+            perfilUsuario.setStatus(rs.getString("status"));
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionemento"));
+            perfilUsuario.setTelefone(rs.getString("telefone"));
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_status_perfil"));
+            perfilUsuario.setStatusLogin(rs.getBoolean("login"));
+
+            list.add(perfilUsuario);
+
+        }
+
+        return list;
 
     }
 
