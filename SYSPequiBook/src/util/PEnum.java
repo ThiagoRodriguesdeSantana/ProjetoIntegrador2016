@@ -9,6 +9,7 @@ import entidade.StatusDaSolicitacao;
 import entidade.StatusLogin;
 import entidade.StatusPerfil;
 import entidade.StatusRelacionamento;
+import java.util.List;
 
 public class PEnum {
 
@@ -84,5 +85,6 @@ public class PEnum {
         }
 
     }
+  
 
 }

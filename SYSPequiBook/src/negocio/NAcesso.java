@@ -19,15 +19,15 @@ public class NAcesso {
 	public EPerfilUsuario Logar(EAcesso eAcesso) throws Exception {
 		
 		if (eAcesso.getEmail().isEmpty()) {
-			throw new Exception("… necess·rio Informar o E-mail!");
+			throw new Exception("√â necess√°rio Informar o E-mail!");
 		} else if (eAcesso.getSenha().isEmpty()) {
-			throw new Exception("… necess·rio informar uma senha!");
+			throw new Exception("√â necess√°rio informar uma senha!");
 		}
 		_NPerfilUsuario = new NPerfilUsuario();
 		EPerfilUsuario perfilUsuario = _NPerfilUsuario.ConsultarUsuario(eAcesso);
 
 		if (perfilUsuario.getCodigo() == 0) {
-			throw new Exception("Usu·rio n„o encotrado! Verifique seu login senha.");
+			throw new Exception("Usu√°rio n√£o encotrado! Verifique seu login senha.");
 		}
 
 		EPerfilUsuarioLogado = perfilUsuario;
@@ -50,7 +50,7 @@ public class NAcesso {
 		_Acesso = new PAcesso();
 		if(_Acesso.Cansultar(perfilUsuario.getAcesso()).getCodigo() !=0){
 			
-			throw new Exception("J· existe um usuario com este login e senha!");
+			throw new Exception("J√° existe um usuario com este login e senha!");
 		}
 		
 		_Acesso.Salvar(perfilUsuario);

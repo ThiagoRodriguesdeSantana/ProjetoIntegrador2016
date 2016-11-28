@@ -67,22 +67,28 @@ public class PPerfilUsuario {
 
     public void Editar(EPerfilUsuario perfilUsuario, Connection con) throws SQLException, Exception {
 
-        String sql = "UPDATE public.perfil_usuario " + "SET id_perfil_usuario=?," + " nome=?," + " telefone=?,"
-                + " status=?, " + "foto=?, " + "login=?," + " id_relacionamento=?," + " id_status_perfil=?,"
-                + " id_acesso=?" + "WHERE id_perfil_usuario =" + perfilUsuario.getCodigo();
+        String sql = "UPDATE public.perfil_usuario\n"
+                + " SET nome=?,"
+                + " telefone=?,"
+                + " status=?,"
+                + " foto=?,"
+                + " id_relacionamento=?,"
+                + " id_status_perfil=?,"
+                + " id_acesso=?,"
+                + " \"StatusLogin\"=?  WHERE id_perfil_usuario =" + perfilUsuario.getCodigo();
 
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setString(1, perfilUsuario.getNome());
         ps.setString(2, perfilUsuario.getTelefone());
-        ps.setBytes(3, perfilUsuario.getFoto());
-        ps.setInt(4, util.PEnum.CodigoStatusPerfil(perfilUsuario.getStatusPerfil(), con));
-        ps.setString(5, perfilUsuario.getStatus());
-        ps.setInt(6, perfilUsuario.getAcesso().getCodigo());
-        ps.setInt(7, util.PEnum.CodigoStatusRelacionamento(perfilUsuario.getStatusRelacionamento(),con));
-        ps.setInt(8, util.PEnum.CodigoStatusPerfil(perfilUsuario.getStatusPerfil(), con));
+        ps.setString(3, perfilUsuario.getStatus());
+        ps.setBytes(4, perfilUsuario.getFoto());
+        ps.setInt(5, util.PEnum.CodigoStatusRelacionamento(perfilUsuario.getStatusRelacionamento(),con));
+        ps.setInt(6, util.PEnum.CodigoStatusPerfil(perfilUsuario.getStatusPerfil(), con));
+        ps.setInt(7, perfilUsuario.getAcesso().getCodigo());
+        ps.setBoolean(8, perfilUsuario.getStatusLogin());
 
-        ps.execute(sql);
+        ps.execute();
 
     }
 

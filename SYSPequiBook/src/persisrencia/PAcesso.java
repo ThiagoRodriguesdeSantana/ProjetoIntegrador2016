@@ -92,16 +92,11 @@ public class PAcesso {
 
         con.setAutoCommit(false);
         try {
-            String sql = "UPDATE public.acesso"
-                    + " SET id_acesso=?,"
-                    + " senha=?,"
-                    + " email=?"
-                    + " WHERE email=" + perfilUsuario.getAcesso().getEmail();
+            String sql = "UPDATE public.acesso SET  senha=?, email=? WHERE email='"+ perfilUsuario.getAcesso().getEmail()+"'";
 
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, perfilUsuario.getCodigo());
-            ps.setString(2, perfilUsuario.getAcesso().getSenha());
-            ps.setString(3, perfilUsuario.getAcesso().getEmail());
+            ps.setString(1, perfilUsuario.getAcesso().getSenha());
+            ps.setString(2, perfilUsuario.getAcesso().getEmail());
 
             ps.execute();
 
@@ -112,6 +107,7 @@ public class PAcesso {
 
         } catch (Exception e) {
             con.rollback();
+            System.out.println(e.getMessage());
         }
 
     }
