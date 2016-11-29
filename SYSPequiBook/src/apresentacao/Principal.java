@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import negocio.NAcesso;
 import negocio.NAmizade;
 import negocio.NPerfilUsuario;
+import util.AtualizarTabela;
 
 /**
  *
@@ -47,6 +48,10 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
 
         initComponents();
+        
+        AtualizarTabela atualizarTabela = new AtualizarTabela(tblSolicitacoes);
+        Thread thread = new Thread(atualizarTabela);
+        thread.start();
 
     }
 
@@ -60,9 +65,8 @@ public class Principal extends javax.swing.JFrame {
         preencherComboBox();
         PreencheTabelaSolicitacao();
         PreencheTabelaAmigosOnline();
-        
+
         paneLogin.setVisible(false);
-        
 
     }
 
@@ -136,8 +140,8 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addGap(0, 283, Short.MAX_VALUE)
-                .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 454, Short.MAX_VALUE)
+                .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(302, 302, 302)
                 .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -494,18 +498,17 @@ public class Principal extends javax.swing.JFrame {
 
     private void btnAcessarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarPerfilActionPerformed
 
-        if(!_pnlLogin){
+        if (!_pnlLogin) {
             paneLogin.setVisible(true);
             _pnlLogin = true;
             btnAcessarPerfil.setText("Sair do perfil");
-        }
-        else{
-            
+        } else {
+
             paneLogin.setVisible(false);
             _pnlLogin = false;
             btnAcessarPerfil.setText("Acessar Perfil");
         }
-            
+
     }//GEN-LAST:event_btnAcessarPerfilActionPerformed
 
     private void btnFotoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFotoActionPerformed
@@ -544,9 +547,9 @@ public class Principal extends javax.swing.JFrame {
 
     private void txtListarUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtListarUsuariosKeyPressed
         try {
-           
+
             Pesquisar();
-            
+
         } catch (Exception e) {
         }
     }//GEN-LAST:event_txtListarUsuariosKeyPressed
@@ -651,14 +654,13 @@ public class Principal extends javax.swing.JFrame {
             txtTelefone.setText(_PerfilUsuario.getTelefone());
             cboRelacionamento.setSelectedItem(_PerfilUsuario.getStatusRelacionamento());
             cboStatusPerfil.setSelectedItem(_PerfilUsuario.getStatusPerfil().ordinal());
-            
+
             ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
             icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
             lbFoto.setIcon(icon);
 
         } catch (Exception e) {
 
-           
             System.out.println(e.getMessage());
         }
 
@@ -712,7 +714,6 @@ public class Principal extends javax.swing.JFrame {
 
         }
         return null;
-
     }
 
     private void AtualizarPerfil() throws IOException, SQLException {
@@ -776,14 +777,12 @@ public class Principal extends javax.swing.JFrame {
         cboStatusPerfil.addItem(StatusPerfil.Privado);
         cboStatusPerfil.addItem(StatusPerfil.Publico);
     }
-    
-    
+
     private void PreencheTabelaSolicitacao() throws SQLException {
 
         Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
-        
 
         Vector detalhe = new Vector();
 
@@ -795,7 +794,6 @@ public class Principal extends javax.swing.JFrame {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
-          
 
             detalhe.add(linha);
 
@@ -804,17 +802,14 @@ public class Principal extends javax.swing.JFrame {
     }
 
     private void PreencheTabelaAmigosOnline() throws SQLException {
-       
+
         NPerfilUsuario perfilUsuario = new NPerfilUsuario();
-        
-         Vector<String> cabecalho = new Vector<>();
+
+        Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
-        
 
         Vector detalhe = new Vector();
-
-        
 
         List<EPerfilUsuario> list = perfilUsuario.ListarUsuarioOnLine();
 
@@ -822,47 +817,35 @@ public class Principal extends javax.swing.JFrame {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
-          
 
             detalhe.add(linha);
 
         }
         tblPessoasOnline.setModel(new DefaultTableModel(detalhe, cabecalho));
-        
-        
-        
+
     }
 
     private void Pesquisar() throws SQLException {
-       
+
         EPerfilUsuario perfilUsuario = new EPerfilUsuario();
 
         if (!txtListarUsuarios.getText().isEmpty()) {
             perfilUsuario.setNome(txtListarUsuarios.getText());
             PreencheTabelaUsuarios(perfilUsuario.getNome());
-        }
-        else{
+        } else {
             PreencheTabelaAmigosOnline();
         }
-
-        
-        
-    
-        
     }
-       private void PreencheTabelaUsuarios(String nome) throws SQLException {
-       
+
+    private void PreencheTabelaUsuarios(String nome) throws SQLException {
+
         NPerfilUsuario perfilUsuario = new NPerfilUsuario();
-        
-        
-         Vector<String> cabecalho = new Vector<>();
+
+        Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
-        
 
         Vector detalhe = new Vector();
-
-        
 
         List<EPerfilUsuario> list = perfilUsuario.ListarUsuarios(nome);
 
@@ -870,17 +853,12 @@ public class Principal extends javax.swing.JFrame {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
-          
 
             detalhe.add(linha);
 
         }
         tblPessoasOnline.setModel(new DefaultTableModel(detalhe, cabecalho));
-        
-        
-        
     }
-    
-    
 
+    
 }
