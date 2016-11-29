@@ -14,10 +14,10 @@ public class Conexao {
 			
 			return DriverManager.getConnection("jdbc:postgresql://localhost/pequibook", "postgres", "sap@123");
 		} catch (ClassNotFoundException e) {
-			System.out.println("Driver n„o encontrado no CLASSPATH");
+			System.out.println("Driver n√£o encontrado no CLASSPATH");
 			return null;
 		} catch (SQLException e) {
-			System.out.println("Erro na conexao com o banco verifique a url, o usu·rio e a senha");
+			System.out.println("Erro na conexao com o banco verifique a url, o usu√°rio e a senha");
 			return null;
 		}
 

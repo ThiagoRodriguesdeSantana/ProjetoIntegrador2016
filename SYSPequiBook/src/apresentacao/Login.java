@@ -26,6 +26,9 @@ public class Login extends javax.swing.JFrame {
         initComponents();
 
         SetControle();
+        
+        txtEmail.setText("thiagorodriguescamara@gmail.com");
+        txtSenha.setText("123456");
 
     }
 
@@ -190,6 +193,7 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception e) {
 
             lblExcecao.setText(e.getMessage());
+            System.out.println(e.getMessage());
         }
     }//GEN-LAST:event_btnEntrarActionPerformed
 

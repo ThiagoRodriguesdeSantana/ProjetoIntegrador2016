@@ -20,29 +20,28 @@ public class PPerfilUsuario {
 
         try {
             String sql = "INSERT INTO public.perfil_usuario"
-            		+ "( nome,"
-            		+ " telefone,"
-            		+ " status,"
-            		+ " foto,"
-            		+ " id_relacionamento,"
-            		+ " id_status_perfil,"
-            		+ " id_acesso,"
-            		+ " \"StatusLogin\")"
-            		+ "VALUES (?, ?, ?, ?, ?,?, ?, ?)";
+                    + "( nome,"
+                    + " telefone,"
+                    + " status,"
+                    + " foto,"
+                    + " id_relacionamento,"
+                    + " id_status_perfil,"
+                    + " id_acesso,"
+                    + " \"StatusLogin\")"
+                    + "VALUES (?, ?, ?, ?, ?,?, ?, ?)";
 
             PreparedStatement ps = con.prepareStatement(sql);
-            
+
             ps.setString(1, perfilUsuario.getNome());
             ps.setString(2, perfilUsuario.getTelefone());
             ps.setString(3, perfilUsuario.getStatus());
             ps.setBytes(4, perfilUsuario.getFoto());
-            ps.setInt(5, util.PEnum.CodigoStatusRelacionamento(perfilUsuario.getStatusRelacionamento(),con));
+            ps.setInt(5, util.PEnum.CodigoStatusRelacionamento(perfilUsuario.getStatusRelacionamento(), con));
             ps.setInt(6, util.PEnum.CodigoStatusPerfil(perfilUsuario.getStatusPerfil(), con));
             ps.setInt(7, perfilUsuario.getAcesso().getCodigo());
-             ps.setBoolean(8, perfilUsuario.getStatusLogin());
+            ps.setBoolean(8, perfilUsuario.getStatusLogin());
 
             ps.execute();
-            
 
         } catch (Exception e) {
 
@@ -83,7 +82,7 @@ public class PPerfilUsuario {
         ps.setString(2, perfilUsuario.getTelefone());
         ps.setString(3, perfilUsuario.getStatus());
         ps.setBytes(4, perfilUsuario.getFoto());
-        ps.setInt(5, util.PEnum.CodigoStatusRelacionamento(perfilUsuario.getStatusRelacionamento(),con));
+        ps.setInt(5, util.PEnum.CodigoStatusRelacionamento(perfilUsuario.getStatusRelacionamento(), con));
         ps.setInt(6, util.PEnum.CodigoStatusPerfil(perfilUsuario.getStatusPerfil(), con));
         ps.setInt(7, perfilUsuario.getAcesso().getCodigo());
         ps.setBoolean(8, perfilUsuario.getStatusLogin());
@@ -110,12 +109,10 @@ public class PPerfilUsuario {
             perfilUsuario.setNome(rs.getString("nome"));
             perfilUsuario.setFoto(rs.getBytes("foto"));
             perfilUsuario.setStatus(rs.getString("status"));
-            StatusRelacionamento relacionamento = Enum.valueOf(StatusRelacionamento.class, rs.getString("r.descricao"));
-            perfilUsuario.setStatusRelacionamento(relacionamento);
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionamento"));
             perfilUsuario.setTelefone(rs.getString("telefone"));
-            StatusPerfil perfil = Enum.valueOf(StatusPerfil.class, rs.getString("sp.descricao"));
-            perfilUsuario.setStatusPerfil(perfil);
-            perfilUsuario.setStatusLogin(rs.getBoolean("login"));
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_status_perfil"));
+            perfilUsuario.setStatusLogin(rs.getBoolean("StatusLogin"));
 
             list.add(perfilUsuario);
 
@@ -142,16 +139,14 @@ public class PPerfilUsuario {
 
             EPerfilUsuario perfilUsuario = new EPerfilUsuario();
 
-            perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
+             perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
             perfilUsuario.setNome(rs.getString("nome"));
             perfilUsuario.setFoto(rs.getBytes("foto"));
             perfilUsuario.setStatus(rs.getString("status"));
-            StatusRelacionamento relacionamento = Enum.valueOf(StatusRelacionamento.class, rs.getString("r.descricao"));
-            perfilUsuario.setStatusRelacionamento(relacionamento);
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionamento"));
             perfilUsuario.setTelefone(rs.getString("telefone"));
-            StatusPerfil perfil = Enum.valueOf(StatusPerfil.class, rs.getString("sp.descricao"));
-            perfilUsuario.setStatusPerfil(perfil);
-            perfilUsuario.setStatusLogin(rs.getBoolean("login"));
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_status_perfil"));
+            perfilUsuario.setStatusLogin(rs.getBoolean("StatusLogin"));
 
             list.add(perfilUsuario);
 
@@ -168,14 +163,13 @@ public class PPerfilUsuario {
                 + " on a.id_perfil_usuario = p.id_perfil_usuario "
                 + " inner join status_da_solicitacao s "
                 + " on a.id_status_da_solicitacao = s.id_status_da_solicitacao"
-                + " where s.\"descricaoSolicitacao\" = '"+StatusDaSolicitacao.Enviado+"' and a.codigo_do_amigo = "+codigoUsuario;
-                
+                + " where s.\"descricaoSolicitacao\" = '" + StatusDaSolicitacao.Enviado + "' and a.codigo_do_amigo = " + codigoUsuario;
 
         Connection conn = util.Conexao.getConexao();
 
         Statement st = conn.createStatement();
         ResultSet rs = st.executeQuery(sql);
-        
+
         List<EPerfilUsuario> list = new ArrayList<>();
 
         while (rs.next()) {
@@ -186,12 +180,10 @@ public class PPerfilUsuario {
             perfilUsuario.setNome(rs.getString("nome"));
             perfilUsuario.setFoto(rs.getBytes("foto"));
             perfilUsuario.setStatus(rs.getString("status"));
-            StatusRelacionamento relacionamento = Enum.valueOf(StatusRelacionamento.class, rs.getString("r.descricao"));
-            perfilUsuario.setStatusRelacionamento(relacionamento);
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionamento"));
             perfilUsuario.setTelefone(rs.getString("telefone"));
-            StatusPerfil perfil = Enum.valueOf(StatusPerfil.class, rs.getString("sp.descricao"));
-            perfilUsuario.setStatusPerfil(perfil);
-            perfilUsuario.setStatusLogin(rs.getBoolean("login"));
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_status_perfil"));
+            perfilUsuario.setStatusLogin(rs.getBoolean("StatusLogin"));
 
             list.add(perfilUsuario);
 
@@ -203,9 +195,9 @@ public class PPerfilUsuario {
 
     public EPerfilUsuario Consultar(EAcesso acesso) throws SQLException {
         String sql = "select * from perfil_usuario p inner join acesso a on p.id_acesso = a.id_acesso"
-        		+ " inner join status_relacionamento r on r.id_relacionamento = p.id_relacionamento "
-        		+ " inner join status_perfil sp on sp.id_status_perfil = p.id_status_perfil"
-        		+ " where email = '" + acesso.getEmail() + "' and senha ='" + acesso.getSenha() + "'";
+                + " inner join status_relacionamento r on r.id_relacionamento = p.id_relacionamento "
+                + " inner join status_perfil sp on sp.id_status_perfil = p.id_status_perfil"
+                + " where email = '" + acesso.getEmail() + "' and senha ='" + acesso.getSenha() + "'";
 
         Connection conn = util.Conexao.getConexao();
 
@@ -215,34 +207,27 @@ public class PPerfilUsuario {
         EPerfilUsuario perfilUsuario = new EPerfilUsuario();
         while (rs.next()) {
 
-            perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
+             perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
             perfilUsuario.setNome(rs.getString("nome"));
-            acesso.setCodigo(rs.getInt("id_acesso"));
-            acesso.setEmail(rs.getString("email"));
-            acesso.setSenha(rs.getString("senha"));
-            perfilUsuario.setAcesso(acesso);
             perfilUsuario.setFoto(rs.getBytes("foto"));
             perfilUsuario.setStatus(rs.getString("status"));
-            StatusRelacionamento relacionamento = Enum.valueOf(StatusRelacionamento.class, rs.getString("descricaoRelacionamento"));
-            perfilUsuario.setStatusRelacionamento(relacionamento);
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionamento"));
             perfilUsuario.setTelefone(rs.getString("telefone"));
-            StatusPerfil perfil = Enum.valueOf(StatusPerfil.class, rs.getString("descricaoPerfil"));
-            perfilUsuario.setStatusPerfil(perfil);
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_status_perfil"));
             perfilUsuario.setStatusLogin(rs.getBoolean("StatusLogin"));
 
         }
 
-
         return perfilUsuario;
 
     }
-     public List<EPerfilUsuario> ListarAmigosOnLine(int codigoUsuario) throws SQLException {
+
+    public List<EPerfilUsuario> ListarAmigosOnLine(int codigoUsuario) throws SQLException {
 
         String sql = "select * from amizade a  left join perfil_usuario p"
                 + " on a.id_perfil_usuario = p.id_perfil_usuario"
-                + " where a.id_perfil_usuario = "+codigoUsuario+" "
-                + " or codigo_do_amigo = "+codigoUsuario;
-               
+                + " where a.id_perfil_usuario = " + codigoUsuario + " "
+                + " or codigo_do_amigo = " + codigoUsuario;
 
         Connection conn = util.Conexao.getConexao();
 
@@ -258,10 +243,10 @@ public class PPerfilUsuario {
             perfilUsuario.setNome(rs.getString("nome"));
             perfilUsuario.setFoto(rs.getBytes("foto"));
             perfilUsuario.setStatus(rs.getString("status"));
-            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionemento"));
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionamento"));
             perfilUsuario.setTelefone(rs.getString("telefone"));
             perfilUsuario.setIdStatusPerfil(rs.getInt("id_status_perfil"));
-            perfilUsuario.setStatusLogin(rs.getBoolean("login"));
+            perfilUsuario.setStatusLogin(rs.getBoolean("StatusLogin"));
 
             list.add(perfilUsuario);
 
