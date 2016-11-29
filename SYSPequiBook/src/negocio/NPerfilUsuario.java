@@ -45,6 +45,11 @@ public class NPerfilUsuario {
 		_NAcesso.EditarPerfil(ePerfilUsuario);
 
 	}
+        public  EPerfilUsuario BuscarUsuario(int codigo) throws SQLException{
+            
+            _PPerfilUsuario = new PPerfilUsuario();
+            return _PPerfilUsuario.Consultar(codigo);
+        }
 
 	public List<EPerfilUsuario> ListarAmigos() throws SQLException {
 
