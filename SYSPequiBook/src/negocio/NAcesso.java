@@ -33,6 +33,8 @@ public class NAcesso {
 		EPerfilUsuarioLogado = perfilUsuario;
 		return perfilUsuario;
 	}
+        
+        
 
 	public void Deslogar() throws SQLException {
 		

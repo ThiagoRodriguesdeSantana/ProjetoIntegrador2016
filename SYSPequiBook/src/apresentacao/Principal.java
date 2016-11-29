@@ -61,9 +61,9 @@ public class Principal extends javax.swing.JFrame {
 
         this._PerfilUsuario = perfilUsuario;
 
-        PreencherControles();
+        lbNome.setText(_PerfilUsuario.getNome());
         preencherComboBox();
-        PreencheTabelaSolicitacao();
+        ordenarSolicitacao();
         PreencheTabelaAmigosOnline();
 
         paneLogin.setVisible(false);
@@ -74,6 +74,9 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        mnuAcessarPerfil = new javax.swing.JMenuItem();
+        mnuCconversar = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lbNome = new javax.swing.JLabel();
@@ -109,7 +112,7 @@ public class Principal extends javax.swing.JFrame {
         cboStatusPerfil = new javax.swing.JComboBox();
         jLabel11 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAcesso = new javax.swing.JButton();
         pnlSenha = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -117,6 +120,20 @@ public class Principal extends javax.swing.JFrame {
         txtNovaSenha = new javax.swing.JPasswordField();
         btnAtualizar = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JSeparator();
+
+        mnuAcessarPerfil.setText("Acessar Perfil");
+        mnuAcessarPerfil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAcessarPerfilActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(mnuAcessarPerfil);
+        mnuAcessarPerfil.getAccessibleContext().setAccessibleName("Acessar Perfil");
+
+        mnuCconversar.setText("Acessar Perfil");
+        mnuCconversar.setActionCommand("Enviar Mensagem");
+        jPopupMenu1.add(mnuCconversar);
+        mnuCconversar.getAccessibleContext().setAccessibleName("Enviar Mensagem");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 0));
@@ -178,6 +195,11 @@ public class Principal extends javax.swing.JFrame {
 
             }
         ));
+        tblPessoasOnline.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblPessoasOnlineMouseReleased(evt);
+            }
+        });
         jScrollPane2.setViewportView(tblPessoasOnline);
 
         jLabel15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagem/2016-11-27 (2).png"))); // NOI18N
@@ -352,10 +374,10 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel8.setText("Relacionamento");
 
-        jButton1.setText("Redefinir Login");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAcesso.setText("Redefinir Login");
+        btnAcesso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAcessoActionPerformed(evt);
             }
         });
 
@@ -420,7 +442,7 @@ public class Principal extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(pnlSenha, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAcesso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addComponent(cboRelacionamento, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -454,7 +476,7 @@ public class Principal extends javax.swing.JFrame {
                     .addComponent(jLabel11)
                     .addComponent(jLabel8))
                 .addGap(18, 18, 18)
-                .addComponent(jButton1)
+                .addComponent(btnAcesso)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pnlSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -499,6 +521,11 @@ public class Principal extends javax.swing.JFrame {
     private void btnAcessarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarPerfilActionPerformed
 
         if (!_pnlLogin) {
+<<<<<<< HEAD
+=======
+
+            PreencherControles();
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
             paneLogin.setVisible(true);
             _pnlLogin = true;
             btnAcessarPerfil.setText("Sair do perfil");
@@ -533,7 +560,7 @@ public class Principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAtualizarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAcessoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessoActionPerformed
 
         if (_lbnEditarSenha) {
             pnlSenha.setVisible(true);
@@ -543,7 +570,7 @@ public class Principal extends javax.swing.JFrame {
             pnlSenha.setVisible(false);
             _lbnEditarSenha = true;
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAcessoActionPerformed
 
     private void txtListarUsuariosKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtListarUsuariosKeyPressed
         try {
@@ -557,6 +584,32 @@ public class Principal extends javax.swing.JFrame {
     private void btnAddPostagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddPostagemActionPerformed
 
     }//GEN-LAST:event_btnAddPostagemActionPerformed
+
+    private void tblPessoasOnlineMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPessoasOnlineMouseReleased
+
+        int index = tblPessoasOnline.getSelectedRow();
+        if (evt.isPopupTrigger()) {
+
+            jPopupMenu1.show(evt.getComponent(), evt.getX(), index);
+        }
+    }//GEN-LAST:event_tblPessoasOnlineMouseReleased
+
+    private void mnuAcessarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAcessarPerfilActionPerformed
+
+        try {
+
+            int linha = tblPessoasOnline.getSelectedRow();
+            int codigo = Integer.parseInt((String) tblPessoasOnline.getValueAt(linha, 1));
+
+            NPerfilUsuario nPerfilUsuario = new NPerfilUsuario();
+
+            AcessarPerfil(nPerfilUsuario.BuscarUsuario(codigo));
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+
+    }//GEN-LAST:event_mnuAcessarPerfilActionPerformed
 
     /**
      * @param args the command line arguments
@@ -598,6 +651,7 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAcessarPerfil;
+    private javax.swing.JButton btnAcesso;
     private javax.swing.JButton btnAddPostagem;
     private javax.swing.JButton btnAtualizar;
     private javax.swing.JButton btnEntrar;
@@ -606,7 +660,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JButton btnRemoverPostagem;
     private javax.swing.JComboBox cboRelacionamento;
     private javax.swing.JComboBox cboStatusPerfil;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -624,11 +677,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbFoto;
     private javax.swing.JLabel lbNome;
+    private javax.swing.JMenuItem mnuAcessarPerfil;
+    private javax.swing.JMenuItem mnuCconversar;
     private javax.swing.JPanel paneLogin;
     private javax.swing.JPanel pnlFoto;
     private javax.swing.JPanel pnlSenha;
@@ -645,10 +701,24 @@ public class Principal extends javax.swing.JFrame {
     private void PreencherControles() {
 
         try {
+            
+            NAcesso acesso = new NAcesso();
+            
+            if(!txtEmail.getText().isEmpty()){
+                _PerfilUsuario.getAcesso().setEmail(txtEmail.getText());
+            }
+            if(!txtNovaSenha.getText().isEmpty()){
+                _PerfilUsuario.getAcesso().setSenha(txtNovaSenha.getText());
+            }
+                
+            
+            EPerfilUsuario perfil = acesso.Logar(_PerfilUsuario.getAcesso());
+            
 
-            lbNome.setText(_PerfilUsuario.getNome());
+            lbNome.setText(perfil.getNome());
             pnlSenha.setVisible(false);
 
+<<<<<<< HEAD
             txtEmail.setText(_PerfilUsuario.getAcesso().getEmail());
             txtNome.setText(_PerfilUsuario.getNome());
             txtTelefone.setText(_PerfilUsuario.getTelefone());
@@ -656,11 +726,76 @@ public class Principal extends javax.swing.JFrame {
             cboStatusPerfil.setSelectedItem(_PerfilUsuario.getStatusPerfil().ordinal());
 
             ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
+=======
+            txtEmail.setText(perfil.getAcesso().getEmail());
+            txtNome.setText(perfil.getNome());
+            txtTelefone.setText(perfil.getTelefone());
+            cboRelacionamento.setSelectedIndex(perfil.getIdStatusRelacionamento());
+            cboStatusPerfil.setSelectedIndex(perfil.getIdStatusPerfil());
+
+            ImageIcon icon = new ImageIcon(perfil.getFoto());
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
             icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
             lbFoto.setIcon(icon);
 
         } catch (Exception e) {
 
+<<<<<<< HEAD
+=======
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+    private void AcessarPerfil(EPerfilUsuario usuario) {
+
+        try {
+
+            if (usuario.getIdStatusPerfil() == (StatusPerfil.Publico.ordinal() + 1)) {
+
+                paneLogin.setVisible(true);
+                lbNome.setText(usuario.getNome());
+
+                btnAcesso.setEnabled(false);
+
+                txtNome.setText(usuario.getNome());
+                txtTelefone.setText(usuario.getTelefone());
+                System.out.println(usuario.getIdStatusRelacionamento());
+                cboRelacionamento.setSelectedIndex(usuario.getIdStatusRelacionamento());
+                cboStatusPerfil.setSelectedIndex(usuario.getIdStatusPerfil());
+
+                ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
+                icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
+                lbFoto.setIcon(icon);
+
+                _pnlLogin = true;
+                btnAcessarPerfil.setText("Sair do perfil");
+
+            } else {
+
+                paneLogin.setVisible(true);
+
+                lbNome.setText(usuario.getNome());
+
+                btnAcesso.setEnabled(false);
+
+                txtNome.setText(usuario.getNome());
+                txtTelefone.setText("Privado");
+                cboRelacionamento.setSelectedIndex(1);
+                cboStatusPerfil.setSelectedIndex(1);
+
+                ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
+                icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
+                lbFoto.setIcon(icon);
+
+                _pnlLogin = true;
+                btnAcessarPerfil.setText("Sair do perfil");
+            }
+            
+
+        } catch (Exception e) {
+
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
             System.out.println(e.getMessage());
         }
 
@@ -763,11 +898,12 @@ public class Principal extends javax.swing.JFrame {
     private void PreencherComboRelacionamento() {
 
         cboRelacionamento.removeAllItems();
-        cboRelacionamento.addItem(StatusRelacionamento.Nenhum);
         cboRelacionamento.addItem(StatusRelacionamento.Casado);
         cboRelacionamento.addItem(StatusRelacionamento.Solteiro);
         cboRelacionamento.addItem(StatusRelacionamento.Divorciado);
         cboRelacionamento.addItem(StatusRelacionamento.Viuvo);
+        cboRelacionamento.addItem(StatusRelacionamento.Nenhum);
+        
     }
 
     private void PreencherComboStatusPerfil() {
@@ -783,6 +919,10 @@ public class Principal extends javax.swing.JFrame {
         Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
+<<<<<<< HEAD
+=======
+        cabecalho.add("ID");
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
 
         Vector detalhe = new Vector();
 
@@ -794,11 +934,16 @@ public class Principal extends javax.swing.JFrame {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
+<<<<<<< HEAD
+=======
+            linha.add(item.getCodigo() + "");
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
 
             detalhe.add(linha);
 
         }
         tblSolicitacoes.setModel(new DefaultTableModel(detalhe, cabecalho));
+
     }
 
     private void PreencheTabelaAmigosOnline() throws SQLException {
@@ -808,6 +953,10 @@ public class Principal extends javax.swing.JFrame {
         Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
+<<<<<<< HEAD
+=======
+        cabecalho.add("ID");
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
 
         Vector detalhe = new Vector();
 
@@ -817,6 +966,10 @@ public class Principal extends javax.swing.JFrame {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
+<<<<<<< HEAD
+=======
+            linha.add(item.getCodigo() + "");
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
 
             detalhe.add(linha);
 
@@ -835,6 +988,10 @@ public class Principal extends javax.swing.JFrame {
         } else {
             PreencheTabelaAmigosOnline();
         }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
     }
 
     private void PreencheTabelaUsuarios(String nome) throws SQLException {
@@ -858,6 +1015,57 @@ public class Principal extends javax.swing.JFrame {
 
         }
         tblPessoasOnline.setModel(new DefaultTableModel(detalhe, cabecalho));
+<<<<<<< HEAD
+=======
+
+    }
+
+    public void ordenarSolicitacao() throws SQLException {
+
+        NAmizade amizade = new NAmizade();
+
+        List<EPerfilUsuario> list = amizade.ListarSolicitacoes();
+
+        int cout = 0;
+
+        EPerfilUsuario ePerfil[] = new EPerfilUsuario[list.size()];
+        for (EPerfilUsuario ePerfilUsuario : list) {
+            ePerfil[cout] = ePerfilUsuario;
+            cout++;
+        }
+
+        for (int i = ePerfil.length - 1; i > 0; i--) {
+            EPerfilUsuario aux;
+            for (int j = 0; j < i; j++) {
+                if (ePerfil[j].getNome().compareToIgnoreCase(ePerfil[j + 1].getNome()) > 0) {
+                    aux = ePerfil[j];
+                    ePerfil[j] = ePerfil[j + 1];
+                    ePerfil[j + 1] = aux;
+                }
+            }
+        }
+
+        imprimirOrdenado(ePerfil);
+    }
+
+    private void imprimirOrdenado(EPerfilUsuario[] ePerfil) {
+        //
+        Vector<String> cabecalho = new Vector<>();
+
+        cabecalho.add("Nome");
+
+        Vector detalhe = new Vector();
+
+
+        for (EPerfilUsuario item : ePerfil) {
+
+            Vector<String> linha = new Vector<>();
+            linha.add(item.getNome());
+
+            detalhe.add(linha);
+        }
+        tblSolicitacoes.setModel(new DefaultTableModel(detalhe, cabecalho));
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
     }
 
     

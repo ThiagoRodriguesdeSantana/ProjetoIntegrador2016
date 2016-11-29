@@ -207,9 +207,10 @@ public class PPerfilUsuario {
         EPerfilUsuario perfilUsuario = new EPerfilUsuario();
         while (rs.next()) {
 
-             perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
+            perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
             perfilUsuario.setNome(rs.getString("nome"));
             perfilUsuario.setFoto(rs.getBytes("foto"));
+            perfilUsuario.setAcesso(acesso);
             perfilUsuario.setStatus(rs.getString("status"));
             perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionamento"));
             perfilUsuario.setTelefone(rs.getString("telefone"));
@@ -255,5 +256,31 @@ public class PPerfilUsuario {
         return list;
 
     }
+     public EPerfilUsuario Consultar(int codigo) throws SQLException {
+        String sql = "select * from perfil_usuario where id_perfil_usuario = "+codigo;
+
+        Connection conn = util.Conexao.getConexao();
+
+        Statement st = conn.createStatement();
+        ResultSet rs = st.executeQuery(sql);
+
+        EPerfilUsuario perfilUsuario = new EPerfilUsuario();
+        while (rs.next()) {
+
+            perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
+            perfilUsuario.setNome(rs.getString("nome"));
+            perfilUsuario.setFoto(rs.getBytes("foto"));
+            perfilUsuario.setStatus(rs.getString("status"));
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionamento"));
+            perfilUsuario.setTelefone(rs.getString("telefone"));
+            perfilUsuario.setIdStatusPerfil(rs.getInt("id_status_perfil"));
+            perfilUsuario.setStatusLogin(rs.getBoolean("StatusLogin"));
+
+        }
+
+        return perfilUsuario;
+
+    }
+     
 
 }
