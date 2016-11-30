@@ -34,6 +34,7 @@ import negocio.NAcesso;
 import negocio.NAmizade;
 import negocio.NMensagem;
 import negocio.NPerfilUsuario;
+import util.AtualizarTabela;
 
 /**
  *
@@ -52,6 +53,10 @@ public class Principal extends javax.swing.JFrame {
     public Principal() {
 
         initComponents();
+        
+        AtualizarTabela atualizarTabela = new AtualizarTabela(tblSolicitacoes);
+        Thread thread = new Thread(atualizarTabela);
+        thread.start();
 
     }
 
@@ -191,8 +196,8 @@ public class Principal extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel2)
-                .addGap(0, 283, Short.MAX_VALUE)
-                .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 454, Short.MAX_VALUE)
+                .addComponent(lbNome, javax.swing.GroupLayout.PREFERRED_SIZE, 353, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(302, 302, 302)
                 .addComponent(btnEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
@@ -565,8 +570,11 @@ public class Principal extends javax.swing.JFrame {
     private void btnAcessarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarPerfilActionPerformed
 
         if (!_pnlLogin) {
+<<<<<<< HEAD
+=======
 
             PreencherControles();
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
             paneLogin.setVisible(true);
             _pnlLogin = true;
             btnAcessarPerfil.setText("Sair do perfil");
@@ -861,6 +869,15 @@ public class Principal extends javax.swing.JFrame {
             lbNome.setText(perfil.getNome());
             pnlSenha.setVisible(false);
 
+<<<<<<< HEAD
+            txtEmail.setText(_PerfilUsuario.getAcesso().getEmail());
+            txtNome.setText(_PerfilUsuario.getNome());
+            txtTelefone.setText(_PerfilUsuario.getTelefone());
+            cboRelacionamento.setSelectedItem(_PerfilUsuario.getStatusRelacionamento());
+            cboStatusPerfil.setSelectedItem(_PerfilUsuario.getStatusPerfil().ordinal());
+
+            ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
+=======
             txtEmail.setText(perfil.getAcesso().getEmail());
             txtNome.setText(perfil.getNome());
             txtTelefone.setText(perfil.getTelefone());
@@ -868,6 +885,7 @@ public class Principal extends javax.swing.JFrame {
             cboStatusPerfil.setSelectedIndex(perfil.getIdStatusPerfil());
 
             ImageIcon icon = new ImageIcon(perfil.getFoto());
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
             icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
             lbFoto.setIcon(icon);
 
@@ -875,6 +893,8 @@ public class Principal extends javax.swing.JFrame {
 
         } catch (Exception e) {
 
+<<<<<<< HEAD
+=======
             System.out.println(e.getMessage());
         }
 
@@ -927,6 +947,7 @@ public class Principal extends javax.swing.JFrame {
 
         } catch (Exception e) {
 
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
             System.out.println(e.getMessage());
         }
 
@@ -980,7 +1001,6 @@ public class Principal extends javax.swing.JFrame {
 
         }
         return null;
-
     }
 
     private void AtualizarPerfil() throws IOException, SQLException {
@@ -1051,7 +1071,10 @@ public class Principal extends javax.swing.JFrame {
         Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
+<<<<<<< HEAD
+=======
         cabecalho.add("ID");
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
 
         Vector detalhe = new Vector();
 
@@ -1063,7 +1086,10 @@ public class Principal extends javax.swing.JFrame {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
+<<<<<<< HEAD
+=======
             linha.add(item.getCodigo() + "");
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
 
             detalhe.add(linha);
 
@@ -1081,7 +1107,10 @@ public class Principal extends javax.swing.JFrame {
         Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
+<<<<<<< HEAD
+=======
         cabecalho.add("ID");
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
 
         Vector detalhe = new Vector();
 
@@ -1091,7 +1120,10 @@ public class Principal extends javax.swing.JFrame {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
+<<<<<<< HEAD
+=======
             linha.add(item.getCodigo() + "");
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
 
             detalhe.add(linha);
 
@@ -1110,7 +1142,10 @@ public class Principal extends javax.swing.JFrame {
         } else {
             PreencheTabelaAmigosOnline();
         }
+<<<<<<< HEAD
+=======
 
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
     }
 
     private void PreencheTabelaUsuarios(String nome) throws SQLException {
@@ -1136,6 +1171,8 @@ public class Principal extends javax.swing.JFrame {
 
         }
         tblPessoasOnline.setModel(new DefaultTableModel(detalhe, cabecalho));
+<<<<<<< HEAD
+=======
 
     }
 
@@ -1185,6 +1222,8 @@ public class Principal extends javax.swing.JFrame {
             detalhe.add(linha);
         }
         tblSolicitacoes.setModel(new DefaultTableModel(detalhe, cabecalho));
+>>>>>>> a7dbbeaeb662fa5bd978825ab14ff045eb86d656
     }
 
+    
 }

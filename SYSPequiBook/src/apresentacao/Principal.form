@@ -111,8 +111,8 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="283" max="32767" attributes="0"/>
-                  <Component id="lbNome" min="-2" pref="524" max="-2" attributes="0"/>
+                  <EmptySpace pref="454" max="32767" attributes="0"/>
+                  <Component id="lbNome" min="-2" pref="353" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="302" max="-2" attributes="0"/>
                   <Component id="btnEntrar" min="-2" pref="79" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
