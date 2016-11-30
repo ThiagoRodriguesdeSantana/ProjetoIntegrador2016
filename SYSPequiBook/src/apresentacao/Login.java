@@ -27,8 +27,7 @@ public class Login extends javax.swing.JFrame {
 
         SetControle();
         
-        txtEmail.setText("thiagorodriguescamara@gmail.com");
-        txtSenha.setText("123456");
+       
 
     }
 
