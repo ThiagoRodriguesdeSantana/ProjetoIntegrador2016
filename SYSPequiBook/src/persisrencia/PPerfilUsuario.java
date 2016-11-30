@@ -227,8 +227,8 @@ public class PPerfilUsuario {
 
         String sql = "select * from amizade a  left join perfil_usuario p"
                 + " on a.id_perfil_usuario = p.id_perfil_usuario"
-                + " where a.id_perfil_usuario = " + codigoUsuario + " "
-                + " or codigo_do_amigo = " + codigoUsuario;
+                + " where codigo_do_amigo = " + codigoUsuario
+                + " and \"StatusLogin\" = 't'";
 
         Connection conn = util.Conexao.getConexao();
 

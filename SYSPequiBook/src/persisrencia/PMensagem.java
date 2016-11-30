@@ -46,9 +46,10 @@ public class PMensagem {
 	public List<EMensagem> Listar(int codigoUsuario) throws Exception {
 		try {
 			String sql = "SELECT id_mensagem, codigo_destinatario, mensagem, visualizado, id_perfil_usuario "
-					+ "FROM public.mensagem" + "where codigo_destinatario = " + NAcesso.EPerfilUsuarioLogado.getCodigo()
-					+ " and id_perfil_usuario =  " + NAcesso.EPerfilUsuarioLogado.getCodigo() + "and visualizado = "
-					+ false;
+                                + " FROM public.mensagem "
+                                + " where codigo_destinatario = "+codigoUsuario
+                                + " and id_perfil_usuario  = "+codigoUsuario
+                                + " and \"visualizado\" = false";
 			Connection conn = util.Conexao.getConexao();
 
 			Statement st = conn.createStatement();

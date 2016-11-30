@@ -3,7 +3,7 @@ package entidade;
 public class EAmizade {
 
 	private int codigo;
-	private EPerfilUsuario amigo;
+	private int codigoAmigo;
 	private int codigoUsiario;
 	private StatusDaSolicitacao daSolicitacao;
 	
@@ -13,11 +13,11 @@ public class EAmizade {
 	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
-	public EPerfilUsuario getAmigo() {
-		return amigo;
+	public int getAmigo() {
+		return codigoAmigo;
 	}
-	public void setAmigo(EPerfilUsuario amigo) {
-		this.amigo = amigo;
+	public void setAmigo(int amigo) {
+		this.codigoAmigo = amigo;
 	}
 	public int getCodigoUsiario() {
 		return codigoUsiario;

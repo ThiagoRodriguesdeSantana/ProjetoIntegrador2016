@@ -6,7 +6,9 @@
 package apresentacao;
 
 import entidade.EAcesso;
+import entidade.EAmizade;
 import entidade.EPerfilUsuario;
+import entidade.StatusDaSolicitacao;
 import entidade.StatusPerfil;
 import entidade.StatusRelacionamento;
 import java.awt.AlphaComposite;
@@ -20,6 +22,8 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
@@ -28,6 +32,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import negocio.NAcesso;
 import negocio.NAmizade;
+import negocio.NMensagem;
 import negocio.NPerfilUsuario;
 
 /**
@@ -72,6 +77,10 @@ public class Principal extends javax.swing.JFrame {
         jPopupMenu1 = new javax.swing.JPopupMenu();
         mnuAcessarPerfil = new javax.swing.JMenuItem();
         mnuCconversar = new javax.swing.JMenuItem();
+        mnuSolicitarAmizade = new javax.swing.JMenuItem();
+        jPopupMenu2 = new javax.swing.JPopupMenu();
+        mnuAceitarSolicitacao = new javax.swing.JMenuItem();
+        mnuRejeitarSolicitacao = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         lbNome = new javax.swing.JLabel();
@@ -125,10 +134,40 @@ public class Principal extends javax.swing.JFrame {
         jPopupMenu1.add(mnuAcessarPerfil);
         mnuAcessarPerfil.getAccessibleContext().setAccessibleName("Acessar Perfil");
 
-        mnuCconversar.setText("Acessar Perfil");
-        mnuCconversar.setActionCommand("Enviar Mensagem");
+        mnuCconversar.setMnemonic('E');
+        mnuCconversar.setText("Enviar Mensagem");
+        mnuCconversar.setActionCommand("");
+        mnuCconversar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuCconversarActionPerformed(evt);
+            }
+        });
         jPopupMenu1.add(mnuCconversar);
         mnuCconversar.getAccessibleContext().setAccessibleName("Enviar Mensagem");
+
+        mnuSolicitarAmizade.setText("Solicitar Amizade");
+        mnuSolicitarAmizade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuSolicitarAmizadeActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(mnuSolicitarAmizade);
+
+        mnuAceitarSolicitacao.setText("Aceitar");
+        mnuAceitarSolicitacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuAceitarSolicitacaoActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(mnuAceitarSolicitacao);
+
+        mnuRejeitarSolicitacao.setText("Rejeitar");
+        mnuRejeitarSolicitacao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnuRejeitarSolicitacaoActionPerformed(evt);
+            }
+        });
+        jPopupMenu2.add(mnuRejeitarSolicitacao);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 153, 0));
@@ -179,6 +218,11 @@ public class Principal extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
         jLabel12.setText("Pessoas Online");
+        jLabel12.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel12MouseClicked(evt);
+            }
+        });
 
         tblPessoasOnline.setBackground(new java.awt.Color(115, 115, 115));
         tblPessoasOnline.setFont(new java.awt.Font("Candara", 1, 12)); // NOI18N
@@ -224,8 +268,9 @@ public class Principal extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtListarUsuarios)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,8 +284,7 @@ public class Principal extends javax.swing.JFrame {
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnAddPostagem)
                                     .addComponent(btnRemoverPostagem))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(txtListarUsuarios))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -255,8 +299,8 @@ public class Principal extends javax.swing.JFrame {
                         .addComponent(btnRemoverPostagem, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 213, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
+                    .addComponent(jLabel14)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtListarUsuarios, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -328,6 +372,11 @@ public class Principal extends javax.swing.JFrame {
 
             }
         ));
+        tblSolicitacoes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tblSolicitacoesMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblSolicitacoes);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 410, 250, 320));
@@ -497,11 +546,11 @@ public class Principal extends javax.swing.JFrame {
             .addGroup(paneLoginLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(paneLoginLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(paneLoginLayout.createSequentialGroup()
                         .addComponent(pnlFoto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnFoto)))
+                        .addComponent(btnFoto))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(342, Short.MAX_VALUE))
         );
 
@@ -603,6 +652,106 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_mnuAcessarPerfilActionPerformed
 
+    private void mnuSolicitarAmizadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuSolicitarAmizadeActionPerformed
+
+        int linha = tblPessoasOnline.getSelectedRow();
+        int codigo = Integer.parseInt((String) tblPessoasOnline.getValueAt(linha, 1));
+        NAmizade amizade = new NAmizade();
+
+        try {
+            if (amizade.ConsultarAmizade(codigo) == 0) {
+
+                EAmizade eAmizade = new EAmizade();
+
+                eAmizade.setAmigo(codigo);
+                eAmizade.setCodigoUsiario(_PerfilUsuario.getCodigo());
+                eAmizade.setDaSolicitacao(StatusDaSolicitacao.Enviado);
+
+                amizade.SolicitarAmizade(eAmizade);
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_mnuSolicitarAmizadeActionPerformed
+
+    private void jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel12MouseClicked
+        
+        try {
+            PreencheTabelaAmigosOnline();
+        } catch (SQLException ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jLabel12MouseClicked
+
+    private void tblSolicitacoesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSolicitacoesMouseReleased
+        
+          int index = tblSolicitacoes.getSelectedRow();
+        if (evt.isPopupTrigger()) {
+
+            jPopupMenu2.show(evt.getComponent(), evt.getX(), index);
+        }
+    }//GEN-LAST:event_tblSolicitacoesMouseReleased
+
+    private void mnuAceitarSolicitacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuAceitarSolicitacaoActionPerformed
+        
+        int linha = tblSolicitacoes.getSelectedRow();
+            int codigo = Integer.parseInt((String) tblSolicitacoes.getValueAt(linha, 1));
+        
+            EAmizade amizade = new EAmizade();
+            
+            amizade.setAmigo(_PerfilUsuario.getCodigo());
+            amizade.setCodigoUsiario(codigo);
+            amizade.setDaSolicitacao(StatusDaSolicitacao.Aceito);   
+            
+           NAmizade nAmizade  =new NAmizade();
+        try {
+            nAmizade.AtualizarAmizade(amizade);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        
+    }//GEN-LAST:event_mnuAceitarSolicitacaoActionPerformed
+
+    private void mnuRejeitarSolicitacaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuRejeitarSolicitacaoActionPerformed
+        
+        int linha = tblSolicitacoes.getSelectedRow();
+            int codigo = Integer.parseInt((String) tblSolicitacoes.getValueAt(linha, 1));
+        
+            EAmizade amizade = new EAmizade();
+            
+            amizade.setAmigo(_PerfilUsuario.getCodigo());
+            amizade.setCodigoUsiario(codigo);
+            amizade.setDaSolicitacao(StatusDaSolicitacao.Rejeitado);   
+            
+           NAmizade nAmizade  =new NAmizade();
+        try {
+            nAmizade.AtualizarAmizade(amizade);
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        }
+    }//GEN-LAST:event_mnuRejeitarSolicitacaoActionPerformed
+
+    private void mnuCconversarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnuCconversarActionPerformed
+        
+        NMensagem mensagem = new NMensagem();
+        try {
+            Mensagem mensagemT  = new Mensagem(mensagem.ListarMensagens());
+            mensagemT.setVisible(true);
+            
+        } catch (Exception ex) {
+            Logger.getLogger(Principal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_mnuCconversarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -670,13 +819,17 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lbFoto;
     private javax.swing.JLabel lbNome;
+    private javax.swing.JMenuItem mnuAceitarSolicitacao;
     private javax.swing.JMenuItem mnuAcessarPerfil;
     private javax.swing.JMenuItem mnuCconversar;
+    private javax.swing.JMenuItem mnuRejeitarSolicitacao;
+    private javax.swing.JMenuItem mnuSolicitarAmizade;
     private javax.swing.JPanel paneLogin;
     private javax.swing.JPanel pnlFoto;
     private javax.swing.JPanel pnlSenha;
@@ -693,19 +846,17 @@ public class Principal extends javax.swing.JFrame {
     private void PreencherControles() {
 
         try {
-            
+
             NAcesso acesso = new NAcesso();
-            
-            if(!txtEmail.getText().isEmpty()){
+
+            if (!txtEmail.getText().isEmpty()) {
                 _PerfilUsuario.getAcesso().setEmail(txtEmail.getText());
             }
-            if(!txtNovaSenha.getText().isEmpty()){
+            if (!txtNovaSenha.getText().isEmpty()) {
                 _PerfilUsuario.getAcesso().setSenha(txtNovaSenha.getText());
             }
-                
-            
+
             EPerfilUsuario perfil = acesso.Logar(_PerfilUsuario.getAcesso());
-            
 
             lbNome.setText(perfil.getNome());
             pnlSenha.setVisible(false);
@@ -719,6 +870,8 @@ public class Principal extends javax.swing.JFrame {
             ImageIcon icon = new ImageIcon(perfil.getFoto());
             icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
             lbFoto.setIcon(icon);
+
+            _PerfilUsuario = perfil;
 
         } catch (Exception e) {
 
@@ -771,7 +924,6 @@ public class Principal extends javax.swing.JFrame {
                 _pnlLogin = true;
                 btnAcessarPerfil.setText("Sair do perfil");
             }
-            
 
         } catch (Exception e) {
 
@@ -883,7 +1035,7 @@ public class Principal extends javax.swing.JFrame {
         cboRelacionamento.addItem(StatusRelacionamento.Divorciado);
         cboRelacionamento.addItem(StatusRelacionamento.Viuvo);
         cboRelacionamento.addItem(StatusRelacionamento.Nenhum);
-        
+
     }
 
     private void PreencherComboStatusPerfil() {
@@ -924,6 +1076,8 @@ public class Principal extends javax.swing.JFrame {
 
         NPerfilUsuario perfilUsuario = new NPerfilUsuario();
 
+        
+        
         Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
@@ -966,6 +1120,7 @@ public class Principal extends javax.swing.JFrame {
         Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
+        cabecalho.add("ID");
 
         Vector detalhe = new Vector();
 
@@ -975,6 +1130,7 @@ public class Principal extends javax.swing.JFrame {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
+            linha.add(item.getCodigo() + "");
 
             detalhe.add(linha);
 
@@ -1016,14 +1172,15 @@ public class Principal extends javax.swing.JFrame {
         Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Nome");
+        cabecalho.add("ID");
 
         Vector detalhe = new Vector();
-
 
         for (EPerfilUsuario item : ePerfil) {
 
             Vector<String> linha = new Vector<>();
             linha.add(item.getNome());
+            linha.add(item.getCodigo()+"");
 
             detalhe.add(linha);
         }
