@@ -1062,36 +1062,36 @@ public class Principal extends javax.swing.JFrame {
         cboStatusPerfil.addItem(StatusPerfil.Publico);
     }
 
-    private void PreencheTabelaSolicitacao() throws SQLException {
-
-        Vector<String> cabecalho = new Vector<>();
-
-        cabecalho.add("Nome");
-
-        cabecalho.add("ID");
-
-
-        Vector detalhe = new Vector();
-
-        NAmizade amizade = new NAmizade();
-
-        List<EPerfilUsuario> list = amizade.ListarSolicitacoes();
-
-        for (EPerfilUsuario item : list) {
-
-            Vector<String> linha = new Vector<>();
-            linha.add(item.getNome());
-
-
-            linha.add(item.getCodigo() + "");
-
-
-            detalhe.add(linha);
-
-        }
-        tblSolicitacoes.setModel(new DefaultTableModel(detalhe, cabecalho));
-
-    }
+//    private void PreencheTabelaSolicitacao() throws SQLException {
+//
+//        Vector<String> cabecalho = new Vector<>();
+//
+//        cabecalho.add("Nome");
+//
+//        cabecalho.add("ID");
+//
+//
+//        Vector detalhe = new Vector();
+//
+//        NAmizade amizade = new NAmizade();
+//
+//        List<EPerfilUsuario> list = amizade.ListarSolicitacoes();
+//
+//        for (EPerfilUsuario item : list) {
+//
+//            Vector<String> linha = new Vector<>();
+//            linha.add(item.getNome());
+//
+//
+//            linha.add(item.getCodigo() + "");
+//
+//
+//            detalhe.add(linha);
+//
+//        }
+//        tblSolicitacoes.setModel(new DefaultTableModel(detalhe, cabecalho));
+//
+//    }
 
     private void PreencheTabelaAmigosOnline() throws SQLException {
 
