@@ -875,7 +875,7 @@ public class Principal extends javax.swing.JFrame {
             cboRelacionamento.setSelectedItem(_PerfilUsuario.getStatusRelacionamento());
             cboStatusPerfil.setSelectedItem(_PerfilUsuario.getStatusPerfil().ordinal());
 
-            ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
+           
 
             txtEmail.setText(perfil.getAcesso().getEmail());
             txtNome.setText(perfil.getNome());
@@ -883,11 +883,12 @@ public class Principal extends javax.swing.JFrame {
             cboRelacionamento.setSelectedIndex(perfil.getIdStatusRelacionamento());
             cboStatusPerfil.setSelectedIndex(perfil.getIdStatusPerfil());
 
-
+            ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
             icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
             lbFoto.setIcon(icon);
 
-            _PerfilUsuario = perfil;
+            AtualizaUsuarioLogado(perfil);
+            
 
         } catch (Exception e) {
 
@@ -1212,6 +1213,12 @@ public class Principal extends javax.swing.JFrame {
         }
         tblSolicitacoes.setModel(new DefaultTableModel(detalhe, cabecalho));
 
+    }
+
+    private void AtualizaUsuarioLogado(EPerfilUsuario perfil) {
+
+        NPerfilUsuario nPerfilUsuario = new NPerfilUsuario();
+        nPerfilUsuario.AtualizaUsuarioLogado(perfil);
     }
 
     

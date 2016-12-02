@@ -12,9 +12,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Acessar Perfil"/>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Acessar Perfil"/>
-          </AccessibilityProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuAcessarPerfilActionPerformed"/>
           </Events>
@@ -25,9 +22,6 @@
             <Property name="text" type="java.lang.String" value="Enviar Mensagem"/>
             <Property name="actionCommand" type="java.lang.String" value=""/>
           </Properties>
-          <AccessibilityProperties>
-            <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Enviar Mensagem"/>
-          </AccessibilityProperties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnuCconversarActionPerformed"/>
           </Events>

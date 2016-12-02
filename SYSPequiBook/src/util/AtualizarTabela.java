@@ -14,7 +14,6 @@ import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import negocio.NAmizade;
-import negocio.NPerfilUsuario;
 
 /**
  *

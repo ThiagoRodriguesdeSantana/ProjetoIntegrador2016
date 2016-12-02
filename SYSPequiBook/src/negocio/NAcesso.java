@@ -60,10 +60,27 @@ public class NAcesso {
 
 	public void EditarPerfil(EPerfilUsuario ePerfilUsuario) throws SQLException {
 
-		if (ePerfilUsuario.equals(NAcesso.EPerfilUsuarioLogado)) {
+		if (ePerfilUsuario.getCodigo()==NAcesso.EPerfilUsuarioLogado.getCodigo()) {
 			_Acesso = new PAcesso();
 			_Acesso.Atualizar(ePerfilUsuario);
 		}
 
 	}
+        public void AtualizarUsuarioLogado(EPerfilUsuario perfil){
+            
+            
+
+            EPerfilUsuarioLogado.setCodigo(perfil.getCodigo());
+            EPerfilUsuarioLogado.setAcesso(perfil.getAcesso());
+            EPerfilUsuarioLogado.setFoto(perfil.getFoto());
+            EPerfilUsuarioLogado.setNome(perfil.getNome());
+            EPerfilUsuarioLogado.setStatus(perfil.getStatus());
+            EPerfilUsuarioLogado.setStatusLogin(true);
+            EPerfilUsuarioLogado.setStatusPerfil(perfil.getStatusPerfil());
+            EPerfilUsuarioLogado.setStatusRelacionamento(perfil.getStatusRelacionamento());
+            EPerfilUsuarioLogado.setTelefone(perfil.getTelefone());
+            
+            
+            
+        }
 }
