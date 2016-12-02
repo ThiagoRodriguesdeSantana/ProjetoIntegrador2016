@@ -26,6 +26,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -34,6 +35,7 @@ import negocio.NAcesso;
 import negocio.NAmizade;
 import negocio.NMensagem;
 import negocio.NPerfilUsuario;
+import persisrencia.PPerfilUsuario;
 import util.AtualizarTabela;
 
 /**
@@ -570,10 +572,13 @@ public class Principal extends javax.swing.JFrame {
     private void btnAcessarPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarPerfilActionPerformed
 
         if (!_pnlLogin) {
-
-
             PreencherControles();
-
+            
+            
+            
+            PPerfilUsuario pPerfilUsuario = new PPerfilUsuario();
+           // EPerfilUsuario ePerfil = pPerfilUsuario.buscarImagem(id);
+            
             paneLogin.setVisible(true);
             _pnlLogin = true;
             btnAcessarPerfil.setText("Sair do perfil");
@@ -855,6 +860,7 @@ public class Principal extends javax.swing.JFrame {
         try {
 
             NAcesso acesso = new NAcesso();
+            PPerfilUsuario pPerfil = new PPerfilUsuario();
 
             if (!txtEmail.getText().isEmpty()) {
                 _PerfilUsuario.getAcesso().setEmail(txtEmail.getText());
@@ -863,9 +869,9 @@ public class Principal extends javax.swing.JFrame {
                 _PerfilUsuario.getAcesso().setSenha(txtNovaSenha.getText());
             }
 
-            EPerfilUsuario perfil = acesso.Logar(_PerfilUsuario.getAcesso());
+            EPerfilUsuario ePerfil = acesso.Logar(_PerfilUsuario.getAcesso());
 
-            lbNome.setText(perfil.getNome());
+            lbNome.setText(ePerfil.getNome());
             pnlSenha.setVisible(false);
 
 
@@ -875,19 +881,19 @@ public class Principal extends javax.swing.JFrame {
             cboRelacionamento.setSelectedItem(_PerfilUsuario.getStatusRelacionamento());
             cboStatusPerfil.setSelectedItem(_PerfilUsuario.getStatusPerfil().ordinal());
 
-            ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
+            ImageIcon icon = new ImageIcon(pPerfil.buscarImagem(_PerfilUsuario.getCodigo()).getFoto());
 
-            txtEmail.setText(perfil.getAcesso().getEmail());
-            txtNome.setText(perfil.getNome());
-            txtTelefone.setText(perfil.getTelefone());
-            cboRelacionamento.setSelectedIndex(perfil.getIdStatusRelacionamento());
-            cboStatusPerfil.setSelectedIndex(perfil.getIdStatusPerfil());
+            txtEmail.setText(ePerfil.getAcesso().getEmail());
+            txtNome.setText(ePerfil.getNome());
+            txtTelefone.setText(ePerfil.getTelefone());
+            cboRelacionamento.setSelectedIndex(ePerfil.getIdStatusRelacionamento());
+            cboStatusPerfil.setSelectedIndex(ePerfil.getIdStatusPerfil());
 
 
             icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
             lbFoto.setIcon(icon);
 
-            _PerfilUsuario = perfil;
+            _PerfilUsuario = ePerfil;
 
         } catch (Exception e) {
 

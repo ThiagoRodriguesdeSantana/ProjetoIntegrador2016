@@ -13,6 +13,7 @@ import entidade.EPerfilUsuario;
 import entidade.StatusDaSolicitacao;
 import entidade.StatusPerfil;
 import entidade.StatusRelacionamento;
+import util.Conexao;
 
 public class PPerfilUsuario {
 
@@ -139,7 +140,7 @@ public class PPerfilUsuario {
 
             EPerfilUsuario perfilUsuario = new EPerfilUsuario();
 
-             perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
+            perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
             perfilUsuario.setNome(rs.getString("nome"));
             perfilUsuario.setFoto(rs.getBytes("foto"));
             perfilUsuario.setStatus(rs.getString("status"));
@@ -256,8 +257,9 @@ public class PPerfilUsuario {
         return list;
 
     }
-     public EPerfilUsuario Consultar(int codigo) throws SQLException {
-        String sql = "select * from perfil_usuario where id_perfil_usuario = "+codigo;
+
+    public EPerfilUsuario Consultar(int codigo) throws SQLException {
+        String sql = "select * from perfil_usuario where id_perfil_usuario = " + codigo;
 
         Connection conn = util.Conexao.getConexao();
 
@@ -279,8 +281,27 @@ public class PPerfilUsuario {
         }
 
         return perfilUsuario;
-
     }
-     
+
+    public EPerfilUsuario buscarImagem(Integer idPerfil) {
+
+        EPerfilUsuario ePerfilUsuario = null;
+        String sql = "SELECT id_perfil_usuario, foto FROM perfil_usuario where id_perfil_usuario = ?";
+        PreparedStatement pst = Conexao.getPreparedStatement(sql);
+
+        try {
+            pst.setInt(1, idPerfil);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                ePerfilUsuario = new EPerfilUsuario();
+                ePerfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
+                ePerfilUsuario.setFoto(rs.getBytes("foto"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ePerfilUsuario = null;
+        }
+        return ePerfilUsuario;
+    }
 
 }

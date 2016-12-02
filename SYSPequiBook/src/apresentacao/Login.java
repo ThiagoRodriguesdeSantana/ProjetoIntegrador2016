@@ -98,6 +98,7 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(btnEntrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(1260, 30, 100, 30));
 
+        lblExcecao.setFont(new java.awt.Font("Candara", 1, 24)); // NOI18N
         lblExcecao.setForeground(new java.awt.Color(255, 0, 0));
         lblExcecao.setText("label1");
         jPanel1.add(lblExcecao, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 390, 30));
@@ -174,8 +175,8 @@ public class Login extends javax.swing.JFrame {
             LimparCAmpos();
             
             lblExcecao.setVisible(true);
-            lblExcecao.setForeground(Color.GREEN);
-            lblExcecao.setText("Voçe já pode acessar sua conta!");
+            lblExcecao.setForeground(Color.ORANGE);
+            lblExcecao.setText("Você já pode acessar sua conta!");
 
         } catch (Exception e) {
 
