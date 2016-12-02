@@ -881,7 +881,11 @@ public class Principal extends javax.swing.JFrame {
             cboRelacionamento.setSelectedItem(_PerfilUsuario.getStatusRelacionamento());
             cboStatusPerfil.setSelectedItem(_PerfilUsuario.getStatusPerfil().ordinal());
 
+<<<<<<< HEAD
             ImageIcon icon = new ImageIcon(pPerfil.buscarImagem(_PerfilUsuario.getCodigo()).getFoto());
+=======
+           
+>>>>>>> 5f76849fc946953ec134b9a063228542bb24dba0
 
             txtEmail.setText(ePerfil.getAcesso().getEmail());
             txtNome.setText(ePerfil.getNome());
@@ -889,11 +893,16 @@ public class Principal extends javax.swing.JFrame {
             cboRelacionamento.setSelectedIndex(ePerfil.getIdStatusRelacionamento());
             cboStatusPerfil.setSelectedIndex(ePerfil.getIdStatusPerfil());
 
-
+            ImageIcon icon = new ImageIcon(_PerfilUsuario.getFoto());
             icon.setImage(icon.getImage().getScaledInstance(pnlFoto.getWidth() - 5, pnlFoto.getHeight() - 5, 100));
             lbFoto.setIcon(icon);
 
+<<<<<<< HEAD
             _PerfilUsuario = ePerfil;
+=======
+            AtualizaUsuarioLogado(perfil);
+            
+>>>>>>> 5f76849fc946953ec134b9a063228542bb24dba0
 
         } catch (Exception e) {
 
@@ -1218,6 +1227,12 @@ public class Principal extends javax.swing.JFrame {
         }
         tblSolicitacoes.setModel(new DefaultTableModel(detalhe, cabecalho));
 
+    }
+
+    private void AtualizaUsuarioLogado(EPerfilUsuario perfil) {
+
+        NPerfilUsuario nPerfilUsuario = new NPerfilUsuario();
+        nPerfilUsuario.AtualizaUsuarioLogado(perfil);
     }
 
     

@@ -138,5 +138,11 @@ public class NPerfilUsuario {
             _PPerfilUsuario = new PPerfilUsuario();
             return _PPerfilUsuario.ListarAmigosOnLine(NAcesso.EPerfilUsuarioLogado.getCodigo());
         }
+        public void AtualizaUsuarioLogado(EPerfilUsuario perfil){
+            
+            _NAcesso = new NAcesso();
+            
+           _NAcesso.AtualizarUsuarioLogado(perfil);
+        }
 
 }
