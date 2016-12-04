@@ -24,16 +24,22 @@ import negocio.NMensagem;
 public class Mensagem extends javax.swing.JFrame {
 
    
-    List<EMensagem> _Mensagem;
+    private int _Codigo;
+    
+    
     public Mensagem() {
         initComponents();
     }
-      public Mensagem(List<EMensagem> eMensagem) {
+      public Mensagem(int codigo) throws Exception {
         
           this();
-        _Mensagem = eMensagem;
-        
+          
+        this._Codigo = codigo;
         ReceberMensagem();
+        LerMensagem();
+        
+        
+        
     }
 
     /**
@@ -45,13 +51,18 @@ public class Mensagem extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMensagem = new javax.swing.JTable();
         txtMensagem = new javax.swing.JTextField();
         btnEnviar = new javax.swing.JButton();
-        btnSair = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 183, 0));
+        setForeground(new java.awt.Color(255, 183, 0));
+
+        jPanel1.setBackground(new java.awt.Color(255, 183, 0));
+        jPanel1.setAutoscrolls(true);
 
         tblMensagem.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -70,39 +81,41 @@ public class Mensagem extends javax.swing.JFrame {
             }
         });
 
-        btnSair.setText("Sair");
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(txtMensagem))
+                .addGap(38, 38, 38))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtMensagem, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnSair)))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(btnSair)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtMensagem)
-                    .addComponent(btnEnviar, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
-                .addContainerGap(20, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -157,7 +170,7 @@ public class Mensagem extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEnviar;
-    private javax.swing.JButton btnSair;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblMensagem;
     private javax.swing.JTextField txtMensagem;
@@ -165,47 +178,54 @@ public class Mensagem extends javax.swing.JFrame {
 
     private void Enviar() throws Exception {
         
-        int codigo = 0;
-        for (EMensagem _Mensagem1 : _Mensagem) {
-            codigo = _Mensagem1.getCodigo();
-            if(codigo>0)
-                break;
-        }
+        EMensagem mensagem = new EMensagem();
         
-        EMensagem novaMensagem = new EMensagem();
+        mensagem.setCodigoDestinatario(_Codigo);
+        mensagem.setCodigoRemetente(NAcesso.EPerfilUsuarioLogado.getCodigo());
+        mensagem.setNome(NAcesso.EPerfilUsuarioLogado.getNome());
+        mensagem.setMensagem(txtMensagem.getText());
+        mensagem.setLido(false);
         
-        novaMensagem.setCodigoDestinatario(codigo);
-        novaMensagem.setCodigoRemetente(NAcesso.EPerfilUsuarioLogado.getCodigo());
-        novaMensagem.setLido(false);
-        novaMensagem.setNome(NAcesso.EPerfilUsuarioLogado.getNome());
-        novaMensagem.setMensagem(txtMensagem.getText());
-        
-        NMensagem mensagem = new NMensagem();
-        mensagem.EnviarMensagem(novaMensagem);
+        NMensagem mensagem1 = new NMensagem();
+        mensagem1.EnviarMensagem(mensagem);
         
         txtMensagem.setText("");
-        
-        _Mensagem  = mensagem.ListarMensagens();
+        ReceberMensagem();
         
     }
 
-    private void ReceberMensagem() {
+    private void ReceberMensagem() throws Exception {
+        
+        NMensagem mensagem = new NMensagem();
+        List<EMensagem> lista = mensagem.ListarMensagens(_Codigo);
         
          Vector<String> cabecalho = new Vector<>();
 
         cabecalho.add("Mensagem");
-        cabecalho.add("ID");
+        
 
         Vector detalhe = new Vector();
 
-        for (EMensagem item : _Mensagem) {
+        for (EMensagem item : lista) {
 
             Vector<String> linha = new Vector<>();
-            linha.add(item.getNome()+"Disse:\n  "+item.getMensagem());
+            if(item.getNome().equals(NAcesso.EPerfilUsuarioLogado.getNome())){
+                linha.add("Você disse :\n"+item.getMensagem());
+            }
+            else
+                linha.add(item.getNome()+" Disse:\n  "+item.getMensagem());
+            
             
             detalhe.add(linha);
         }
         tblMensagem.setModel(new DefaultTableModel(detalhe, cabecalho));
+    }
+
+    private void LerMensagem() throws Exception {
+        
+        NMensagem mensagem = new NMensagem();
+        mensagem.LerMensagem(_Codigo);
+        
     }
 
 }

@@ -12,137 +12,145 @@ import persisrencia.PPerfilUsuario;
 
 public class NPerfilUsuario {
 
-	private PPerfilUsuario _PPerfilUsuario;
-	private NAmizade _NAmizade;
-	private NPostagem _NPostagem;
-	private NMensagem _NMensagem;
-	private NAcesso _NAcesso;
-	
-	public NPerfilUsuario(){
-		
-	}
+    private PPerfilUsuario _PPerfilUsuario;
+    private NAmizade _NAmizade;
+    private NPostagem _NPostagem;
+    private NMensagem _NMensagem;
+    private NAcesso _NAcesso;
 
-	public void SalvarPerfil(EPerfilUsuario ePerfilUsuario) throws Exception {
+    public NPerfilUsuario() {
 
-		if (ePerfilUsuario.getAcesso().getEmail().equals(null)) {
-			throw new Exception("� necess�rio cadastrar um email!");
-		}
-		if (ePerfilUsuario.getAcesso().getSenha().equals(null)) {
-			throw new Exception("� necess�rio cadastrar uma senha!");
-		}
-		if (ePerfilUsuario.getNome().equals(null)) {
-			throw new Exception("� necess�rio cadastrar um nome ou apelido!");
-		}
+    }
 
-		_NAcesso = new NAcesso();
-		_NAcesso.Salvar(ePerfilUsuario);
+    public void SalvarPerfil(EPerfilUsuario ePerfilUsuario) throws Exception {
 
-	}
-
-	public void EditarPerfil(EPerfilUsuario ePerfilUsuario) throws SQLException {
-
-		_NAcesso = new NAcesso();
-		_NAcesso.EditarPerfil(ePerfilUsuario);
-
-	}
-        public  EPerfilUsuario BuscarUsuario(int codigo) throws SQLException{
-            
-            _PPerfilUsuario = new PPerfilUsuario();
-            return _PPerfilUsuario.Consultar(codigo);
+        if (ePerfilUsuario.getAcesso().getEmail().equals(null)) {
+            throw new Exception("� necess�rio cadastrar um email!");
+        }
+        if (ePerfilUsuario.getAcesso().getSenha().equals(null)) {
+            throw new Exception("� necess�rio cadastrar uma senha!");
+        }
+        if (ePerfilUsuario.getNome().equals(null)) {
+            throw new Exception("� necess�rio cadastrar um nome ou apelido!");
         }
 
-	public List<EPerfilUsuario> ListarAmigos() throws SQLException {
+        _NAcesso = new NAcesso();
+        _NAcesso.Salvar(ePerfilUsuario);
 
-		_NAmizade = new NAmizade();
-		return _NAmizade.ListarAmigos(NAcesso.EPerfilUsuarioLogado.getCodigo());
+    }
 
-	}
+    public void EditarPerfil(EPerfilUsuario ePerfilUsuario) throws SQLException {
 
-	public List<EPerfilUsuario> ListarUsuarios(String nome) throws SQLException {
+        _NAcesso = new NAcesso();
+        _NAcesso.EditarPerfil(ePerfilUsuario);
 
-		_PPerfilUsuario = new PPerfilUsuario();
-		return _PPerfilUsuario.Listar(nome);
-	}
+    }
 
-	public void DesfazerAmizade(EAmizade amizade) throws Exception {
+    public EPerfilUsuario BuscarUsuario(int codigo) throws SQLException {
 
-		_NAmizade = new NAmizade();
-		_NAmizade.DesfazerAmizade(amizade.getCodigo());
+        _PPerfilUsuario = new PPerfilUsuario();
+        return _PPerfilUsuario.Consultar(codigo);
+    }
 
-	}
+    public List<EPerfilUsuario> ListarAmigos() throws SQLException {
 
-	public void ExcluirConta() throws SQLException {
+        _NAmizade = new NAmizade();
+        return _NAmizade.ListarAmigos(NAcesso.EPerfilUsuarioLogado.getCodigo());
 
-		_NAcesso   = new NAcesso(); 
-		_NAcesso.Excluir();
+    }
 
-	}
+    public List<EPerfilUsuario> ListarUsuarios(String nome) throws SQLException {
 
-	public EPerfilUsuario ConsultarUsuario(EAcesso acesso) throws SQLException {
+        _PPerfilUsuario = new PPerfilUsuario();
+        return _PPerfilUsuario.Listar(nome);
+    }
 
-		_PPerfilUsuario = new PPerfilUsuario();
-		return _PPerfilUsuario.Consultar(acesso);
-	}
+    public void DesfazerAmizade(EAmizade amizade) throws Exception {
 
-	public void PostarConteudo(EPostagem ePostagem) throws SQLException {
+        _NAmizade = new NAmizade();
+        _NAmizade.DesfazerAmizade(amizade.getCodigo());
 
-		_NPostagem = new NPostagem();
-		_NPostagem.Postar(ePostagem);
+    }
 
-	}
+    public void ExcluirConta() throws SQLException {
 
-	public void SolicitarAmizade(EAmizade amizade) throws Exception {
+        _NAcesso = new NAcesso();
+        _NAcesso.Excluir();
 
-		_NAmizade = new NAmizade();
-		_NAmizade.SolicitarAmizade(amizade);
+    }
 
-	}
+    public EPerfilUsuario ConsultarUsuario(EAcesso acesso) throws SQLException {
 
-	public List<EPerfilUsuario> ReceberSolicitacaoDeAmizade(EAmizade amizade) throws SQLException {
+        _PPerfilUsuario = new PPerfilUsuario();
+        return _PPerfilUsuario.Consultar(acesso);
+    }
 
-		return _NAmizade.ListarSolicitacoes();
+    public void PostarConteudo(EPostagem ePostagem) throws SQLException {
 
-	}
+        _NPostagem = new NPostagem();
+        _NPostagem.Postar(ePostagem);
 
-	public void ResponderSolicitacao(EAmizade amizade) throws Exception {
+    }
 
-		_NAmizade = new NAmizade();
-		_NAmizade.AtualizarAmizade(amizade);
-	}
+    public void SolicitarAmizade(EAmizade amizade) throws Exception {
 
-	public void EnviarMensagem(EMensagem mensagem) throws Exception {
+        _NAmizade = new NAmizade();
+        _NAmizade.SolicitarAmizade(amizade);
 
-		_NMensagem = new NMensagem();
-		_NMensagem.EnviarMensagem(mensagem);
+    }
 
-	}
+    public List<EPerfilUsuario> ReceberSolicitacaoDeAmizade(EAmizade amizade) throws SQLException {
 
-	/*
-	 * public List<EMensagem> ReceberMensagem(int codigoUsuario) throws
-	 * Exception{
-	 * 
-	 * return _NMensagem.ListarMensagens(); }
-	 */
-	public void LerMensagem(EMensagem mensagem) throws Exception {
+        return _NAmizade.ListarSolicitacoes();
 
-		_NMensagem = new NMensagem();
-		_NMensagem.LerMensagem(mensagem);
-	}
+    }
 
-	public List<EPostagem> ListarPostagem(int codigoUsuario) throws SQLException {
+    public void ResponderSolicitacao(EAmizade amizade) throws Exception {
 
-		_NPostagem = new NPostagem();
-		return _NPostagem.ListarPostagem(codigoUsuario);
-	}
-        public List<EPerfilUsuario> ListarUsuarioOnLine() throws SQLException{
-            _PPerfilUsuario = new PPerfilUsuario();
-            return _PPerfilUsuario.ListarAmigosOnLine(NAcesso.EPerfilUsuarioLogado.getCodigo());
-        }
-        public void AtualizaUsuarioLogado(EPerfilUsuario perfil){
-            
-            _NAcesso = new NAcesso();
-            
-           _NAcesso.AtualizarUsuarioLogado(perfil);
-        }
+        _NAmizade = new NAmizade();
+        _NAmizade.AtualizarAmizade(amizade);
+    }
+
+    public void EnviarMensagem(EMensagem mensagem) throws Exception {
+
+        _NMensagem = new NMensagem();
+        _NMensagem.EnviarMensagem(mensagem);
+
+    }
+
+    /*
+     * public List<EMensagem> ReceberMensagem(int codigoUsuario) throws
+     * Exception{
+     * 
+     * return _NMensagem.ListarMensagens(); }
+     */
+//	public void LerMensagem(EMensagem mensagem) throws Exception {
+//
+//		_NMensagem = new NMensagem();
+//		_NMensagem.LerMensagem(mensagem.getCodigo());
+//	}
+    public List<EPostagem> ListarPostagem(int codigoUsuario) throws SQLException {
+
+        _NPostagem = new NPostagem();
+        return _NPostagem.ListarPostagem(codigoUsuario);
+    }
+
+    public List<EPerfilUsuario> ListarUsuarioOnLine() throws SQLException {
+        _PPerfilUsuario = new PPerfilUsuario();
+        return _PPerfilUsuario.ListarAmigosOnLine(NAcesso.EPerfilUsuarioLogado.getCodigo());
+    }
+
+    public void AtualizaUsuarioLogado(EPerfilUsuario perfil) {
+
+        _NAcesso = new NAcesso();
+
+        _NAcesso.AtualizarUsuarioLogado(perfil);
+    }
+
+    public void Editar(int codigoUsuario, boolean status) throws Exception {
+        PPerfilUsuario pPerfilUsuario = new PPerfilUsuario();
+
+        pPerfilUsuario.Editar(codigoUsuario, status);
+    }
 
 }

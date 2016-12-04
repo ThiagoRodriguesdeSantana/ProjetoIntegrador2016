@@ -26,6 +26,8 @@ public class Login extends javax.swing.JFrame {
         initComponents();
 
         SetControle();
+        txtEmail.setText("thiagorodriguescamara@gmail.com");
+        txtSenha.setText("123456");
         
        
 
@@ -302,9 +304,17 @@ public class Login extends javax.swing.JFrame {
         EAcesso acesso = new EAcesso();
         acesso.setEmail(txtEmail.getText());
         acesso.setSenha(txtSenha.getText());
+        
+        EPerfilUsuario perfilUsuario = nAcesso.Logar(acesso);
 
-        Principal principal = new Principal(nAcesso.Logar(acesso));
+        if(perfilUsuario.getCodigo() != 0){
+            
+        Principal principal = new Principal(perfilUsuario);
         principal.setVisible(true);
         this.dispose();
+        
+        
+        }
+        
     }
 }

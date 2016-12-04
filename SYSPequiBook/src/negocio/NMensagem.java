@@ -19,13 +19,13 @@ public class NMensagem {
 		_PMensagem.Salvar(eMensagem);
 		
 	}
-	public List<EMensagem> ListarMensagens() throws Exception{
+	public List<EMensagem> ListarMensagens(int destinatario) throws Exception{
 		
 		_PMensagem = new PMensagem();
-		return _PMensagem.Listar(NAcesso.EPerfilUsuarioLogado.getCodigo());
+		return _PMensagem.Listar(NAcesso.EPerfilUsuarioLogado.getCodigo(),destinatario);
 	}
-	public void LerMensagem(EMensagem mensagem) throws Exception{
+	public void LerMensagem(int codigo) throws Exception{
 		_PMensagem = new PMensagem();
-		_PMensagem.Atualizar(mensagem);
+		_PMensagem.Atualizar(codigo);
 	}
 }

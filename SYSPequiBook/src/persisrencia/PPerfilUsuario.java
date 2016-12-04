@@ -83,8 +83,8 @@ public class PPerfilUsuario {
         ps.setString(2, perfilUsuario.getTelefone());
         ps.setString(3, perfilUsuario.getStatus());
         ps.setBytes(4, perfilUsuario.getFoto());
-        ps.setInt(5, util.PEnum.CodigoStatusRelacionamento(perfilUsuario.getStatusRelacionamento(), con));
-        ps.setInt(6, util.PEnum.CodigoStatusPerfil(perfilUsuario.getStatusPerfil(), con));
+        ps.setInt(5, perfilUsuario.getIdStatusRelacionamento());
+        ps.setInt(6, perfilUsuario.getIdStatusPerfil());
         ps.setInt(7, perfilUsuario.getAcesso().getCodigo());
         ps.setBoolean(8, perfilUsuario.getStatusLogin());
 
@@ -211,9 +211,10 @@ public class PPerfilUsuario {
             perfilUsuario.setCodigo(rs.getInt("id_perfil_usuario"));
             perfilUsuario.setNome(rs.getString("nome"));
             perfilUsuario.setFoto(rs.getBytes("foto"));
+            acesso.setCodigo(rs.getInt("id_acesso"));
             perfilUsuario.setAcesso(acesso);
             perfilUsuario.setStatus(rs.getString("status"));
-            perfilUsuario.setIdStatusPerfil(rs.getInt("id_relacionamento"));
+            perfilUsuario.setIdStatusRelacionamento(rs.getInt("id_relacionamento"));
             perfilUsuario.setTelefone(rs.getString("telefone"));
             perfilUsuario.setIdStatusPerfil(rs.getInt("id_status_perfil"));
             perfilUsuario.setStatusLogin(rs.getBoolean("StatusLogin"));
@@ -286,7 +287,9 @@ public class PPerfilUsuario {
     public EPerfilUsuario buscarImagem(Integer idPerfil) {
 
         EPerfilUsuario ePerfilUsuario = null;
+        
         String sql = "SELECT id_perfil_usuario, foto FROM perfil_usuario where id_perfil_usuario = ?";
+        
         PreparedStatement pst = Conexao.getPreparedStatement(sql);
 
         try {
@@ -302,6 +305,18 @@ public class PPerfilUsuario {
             ePerfilUsuario = null;
         }
         return ePerfilUsuario;
+    }
+    public void Editar(int codigoUsuario, boolean status) throws SQLException, Exception {
+
+        String sql = "UPDATE public.perfil_usuario"
+                + " SET \"StatusLogin\"= "+status
+                + " WHERE id_perfil_usuario =" +codigoUsuario;
+
+        Connection conn = util.Conexao.getConexao();
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        ps.execute();
+
     }
 
 }

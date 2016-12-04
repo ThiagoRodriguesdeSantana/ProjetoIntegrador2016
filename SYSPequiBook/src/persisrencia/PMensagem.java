@@ -16,23 +16,21 @@ public class PMensagem {
 
 		try {
 			String sql = "INSERT INTO public.mensagem"
-					+ "(id_mensagem,"
-					+ "codigo_destinatario,"
-					+ "mensagem,"
-					+ "visualizado,"
-					+ "id_perfil_usuario)" 
-					+ "nome"
-					+ " VALUES (?, ?, ?, ?, ?, ?);";
+                                + "( codigo_destinatario,"
+                                + " mensagem,"
+                                + " visualizado,"
+                                + " id_perfil_usuario)"
+                                + " VALUES (?, ?, ?, ?)";
 
 			Connection cnn = util.Conexao.getConexao();
 			PreparedStatement ps = cnn.prepareStatement(sql);
 
-			ps.setInt(1, eMensagem.getCodigoRemetente());
-			ps.setInt(2, eMensagem.getCodigoDestinatario());
-			ps.setString(3, eMensagem.getMensagem());
-			ps.setDate(4, eMensagem.getDataHoraEnvio());
-			ps.setBoolean(4, eMensagem.isLido());
-			ps.setString(6, eMensagem.getNome());
+			
+			ps.setInt(1, eMensagem.getCodigoDestinatario());
+                        ps.setString(2, eMensagem.getMensagem());
+                        ps.setBoolean(3, eMensagem.isLido());
+                        ps.setInt(4, eMensagem.getCodigoRemetente());
+			
 
 			ps.execute();
 
@@ -43,13 +41,16 @@ public class PMensagem {
 
 	}
 
-	public List<EMensagem> Listar(int codigoUsuario) throws Exception {
+	public List<EMensagem> Listar(int codigoUsuario, int destinatario) throws Exception {
 		try {
-			String sql = "SELECT id_mensagem, codigo_destinatario, mensagem, visualizado, id_perfil_usuario "
-                                + " FROM public.mensagem "
-                                + " where codigo_destinatario = "+codigoUsuario
-                                + " and id_perfil_usuario  = "+codigoUsuario
-                                + " and \"visualizado\" = false";
+			String sql = "select p.nome,* from mensagem as m"
+                                + " inner join perfil_usuario as p "
+                                + " on m.id_perfil_usuario = p.id_perfil_usuario"
+                                + " where codigo_destinatario = "+destinatario
+                                + " and   m.id_perfil_usuario = "+codigoUsuario
+                                + " and \"visualizado\" = 'false'"
+                                + " or codigo_destinatario = "+codigoUsuario
+                                + " and   m.id_perfil_usuario = "+destinatario;
 			Connection conn = util.Conexao.getConexao();
 
 			Statement st = conn.createStatement();
@@ -78,26 +79,18 @@ public class PMensagem {
 		}
 	}
 
-	public void Atualizar(EMensagem mensagem) throws Exception {
+	public void Atualizar(int  codigoRemetente) throws Exception {
 		
 		try {
-			String sql = "UPDATE public.mensagem SET"
-					+ "codigo_destinatario=?,"
-					+ "mensagem=?,"
-					+ "visualizado=?,"
-					+ "id_perfil_usuario=?"
-					+ "WHERE id_mensagem = "+mensagem.getCodigo();
+			String sql = "UPDATE public.mensagem"
+                                + " SET visualizado= 'true'"
+                                + " where id_perfil_usuario = "+codigoRemetente
+                                + " and codigo_destinatario = "+NAcesso.EPerfilUsuarioLogado.getCodigo()
+                                + " and visualizado = false ";
 			
 			Connection cnn = util.Conexao.getConexao();
 			PreparedStatement ps = cnn.prepareStatement(sql);
 
-			
-			ps.setInt(1, mensagem.getCodigoDestinatario());
-			ps.setString(2, mensagem.getMensagem());
-			ps.setBoolean(3, mensagem.isLido());
-			ps.setInt(4, mensagem.getCodigoRemetente());
-			ps.setDate(5, mensagem.getDataHoraEnvio());
-			
 
 			ps.execute();
 			
@@ -108,5 +101,35 @@ public class PMensagem {
 		}
 		
 
+	}
+        public List<EMensagem> ListarMensagens() throws Exception {
+		try {
+			String sql = "select p.nome,m.id_perfil_usuario from mensagem as m"
+                                + " inner join perfil_usuario as p "
+                                + " on m.id_perfil_usuario = p.id_perfil_usuario"
+                                + " where codigo_destinatario = "+NAcesso.EPerfilUsuarioLogado.getCodigo()
+                                + " and \"visualizado\" = 'false'";
+			Connection conn = util.Conexao.getConexao();
+
+			Statement st = conn.createStatement();
+			ResultSet rs =  st.executeQuery(sql);
+			List<EMensagem> list = new ArrayList<>();
+
+			while(rs.next()){
+				EMensagem mensagem = new EMensagem();
+				
+				mensagem.setCodigoRemetente(rs.getInt("id_perfil_usuario"));
+				mensagem.setNome(rs.getString("nome"));
+				
+				list.add(mensagem);
+				
+			}
+			
+			return list;
+			
+		} catch (Exception e) {
+
+			throw new Exception(e.getMessage());
+		}
 	}
 }
